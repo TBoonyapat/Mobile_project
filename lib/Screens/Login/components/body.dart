@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             
-            SizedBox(height: size.height * 0.001),
+            SizedBox(height: size.height * 0.002),
             SvgPicture.asset(
               "assets/icons/ing.svg",
               height: size.height * 0.3,
