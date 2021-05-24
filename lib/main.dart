@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application/Screens/Login/login_screen.dart';
+// import 'package:mobile_application/Screens/Login/login_screen.dart';
 import 'package:mobile_application/constants.dart';
-
+import 'Notifications/TestNotifyScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+      home: TestNotifyScreen(),
     );
   }
 }
-
