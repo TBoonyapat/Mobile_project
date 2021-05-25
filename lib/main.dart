@@ -3,14 +3,13 @@ import 'package:mobile_application/Screens/sidebar_layout.dart';
 import 'package:mobile_application/Screens/Home/drawer_screen.dart';
 import 'package:mobile_application/Screens/Page/home_screen.dart';
 import 'package:mobile_application/Screens/Page/add_from.dart';
-// import 'package:mobile_application/Screens/Login/login_screen.dart';
-// import 'package:mobile_application/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+// import 'package:mobile_application/Screens/Login/login_screen.dart';
+import 'package:mobile_application/constants.dart';
+import 'Notifications/TestNotifyScreen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -34,6 +33,7 @@ class MyApp extends StatelessWidget {
       //     page: () => HomeScreen(),
       //   )
       // ],
+      //home: TestNotifyScreen(),
     );
   }
 }
@@ -46,3 +46,4 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+
