@@ -70,9 +70,6 @@ packages:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.2.0"
-=======
     version: "1.2.0-nullsafety.1"
   ffi:
     dependency: transitive
@@ -88,13 +85,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -102,7 +97,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.3"
-=======
   flutter_local_notifications:
     dependency: "direct main"
     description:
@@ -117,7 +111,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   flutter_svg:
     dependency: "direct main"
     description:
@@ -130,7 +123,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
   get:
     dependency: "direct main"
     description:
@@ -138,7 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
-=======
   http:
     dependency: "direct main"
     description:
@@ -160,7 +151,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   matcher:
     dependency: transitive
     description:
@@ -203,7 +193,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4"
-<<<<<<< HEAD
   percent_indicator:
     dependency: "direct main"
     description:
@@ -211,7 +200,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.9+1"
-=======
   path_provider:
     dependency: "direct main"
     description:
@@ -254,7 +242,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.2"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   petitparser:
     dependency: transitive
     description:
@@ -262,7 +249,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-<<<<<<< HEAD
   provider:
     dependency: transitive
     description:
@@ -270,7 +256,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.3"
-=======
   platform:
     dependency: transitive
     description:
@@ -299,7 +284,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.24.1"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   sky_engine:
     dependency: transitive
     description: flutter
@@ -360,9 +344,6 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.1.0"
-=======
     version: "2.1.0-nullsafety.3"
   win32:
     dependency: transitive
@@ -378,7 +359,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
->>>>>>> afbefaf36e6f44536785ec2490c261292817dcd3
   xml:
     dependency: transitive
     description:
