@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_application/Screens/Page/configuration.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:mobile_application/models/tooyen.dart';
+import 'package:mobile_application/providers/tooyen_provider.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,6 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   double yOffset = 0;
 
   bool isDrawerOpen = false;
+  void initState() {
+    super.initState();
+    Provider.of<TooyenProvider>(context, listen: false).initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Image.asset(categories[index]['iconPath'],
                                 height: 55, width: 55),
                             onPressed: () => null),
-                            //color: Colors.grey[700],
+                        //color: Colors.grey[700],
                       ),
                       Text(categories[index]['name']) //ปรับตำแหน่งตัวอักษรด้วย
                     ],
@@ -123,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Hero(
                               tag: 1,
                               child: Image.asset('assets/images/monkey.png')),
+                          //child: Image.asset('assets/images/monkey.png')),
                         )
                       ],
                     ),
@@ -158,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             progressColor: Colors.red[300],
-                            backgroundColor: Colors.green[300],
+                            //backgroundColor: Colors.green[300],
                           ),
                         ),
                         Align(
@@ -190,12 +200,53 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          //Test(),
           SizedBox(
             height: 50,
           )
         ],
       ),
     );
+  }
+}
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Consumer(
+      builder: (context, TooyenProvider provider, Widget child) {
+        var count = provider.tooyenList.length; //นับจำนวนข้อมูล
+        if (count <= 0) {
+          return Center(
+            child: Text(
+              "ไม่พบข้อมูล",
+              style: TextStyle(fontSize: 35),
+            ),
+          );
+        } else {
+          return ListView.builder(
+              itemCount: count,
+              itemBuilder: (context, int index) {
+                Tooyen data = provider.tooyenList[index];
+                return Card(
+                  elevation: 5,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: FittedBox(
+                        child: Text(data.category),
+                      ),
+                    ),
+                    title: Text(data.name),
+                    subtitle: Text(DateFormat("dd/MM/yyyy").format(data.date)),
+                  ),
+                );
+              });
+        }
+      },
+    ));
   }
 }
 

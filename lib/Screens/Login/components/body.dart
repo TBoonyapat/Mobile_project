@@ -7,6 +7,8 @@ import 'package:mobile_application/components/rounded_input_field.dart';
 import 'package:mobile_application/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 
+
+
 class Body extends StatelessWidget {
   const Body({
     Key key,

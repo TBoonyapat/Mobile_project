@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application/Screens/Home/drawer_screen.dart';
+import 'package:mobile_application/Screens/Page/drawer_screen.dart';
 import 'package:mobile_application/Screens/Page/home_screen.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFA0C2A5),
+      color: Colors.white,
       child: Padding(
         padding: EdgeInsets.only(top: 50, left: 40, bottom: 70),
         child: Column(
