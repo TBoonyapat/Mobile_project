@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:mobile_application/components/rounded_input_field.dart';
 import 'package:mobile_application/components/text_field_container.dart';
 import 'package:mobile_application/constants.dart';
-import 'package:mobile_application/components/rounded_button.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -273,16 +271,16 @@ class _AddFromState extends State<AddFrom> {
                     ),
                   ),
                   SizedBox(
-                    height: 36,
+                    height: 44,
                   ),
                   Column(
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 10),
-                        width: _width / 2,
-                        height: _height / 14,
+                        width: _width / 2.5,
+                        height: _height / 16,
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(29),
+                            borderRadius: BorderRadius.circular(17),
                             child: FlatButton(
                               child: Text(
                                 "เพิ่มข้อมูล",
@@ -319,7 +317,7 @@ class _AddFromState extends State<AddFrom> {
                                   noti.showNotificationDaily(
                                       name, selectedDate);
                                   //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
-                                  // provider.delTooyen();
+                                  //provider.delTooyen();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

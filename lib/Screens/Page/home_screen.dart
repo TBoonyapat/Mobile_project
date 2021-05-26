@@ -25,186 +25,296 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      transform: Matrix4.translationValues(xOffset, yOffset, 0)
-        ..scale(isDrawerOpen ? 0.85 : 1.00)
-        ..rotateZ(isDrawerOpen ? -50 : 0),
-      duration: Duration(milliseconds: 200),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius:
-            isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
-      ),
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                isDrawerOpen
-                    ? GestureDetector(
-                        child: Icon(Icons.arrow_back_ios),
-                        onTap: () {
-                          setState(() {
-                            xOffset = 0;
-                            yOffset = 0;
-                            isDrawerOpen = false;
-                          });
-                        },
-                      )
-                    : GestureDetector(
-                        child: Icon(Icons.menu),
-                        onTap: () {
-                          setState(() {
-                            xOffset = 290;
-                            yOffset = 80;
-                            isDrawerOpen = true;
-                          });
-                        },
-                      ),
-                Text(
-                  'Too-Yen',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      decoration: TextDecoration.none),
-                ),
-                Container(),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Container(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: shadowList,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: FlatButton(
-                            child: Image.asset(categories[index]['iconPath'],
-                                height: 55, width: 55),
-                            onPressed: () => null),
-                        //color: Colors.grey[700],
-                      ),
-                      Text(categories[index]['name']) //ปรับตำแหน่งตัวอักษรด้วย
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-          GestureDetector(
-            child: Container(
-              height: 220,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    //กรอบ1(สีเทา)
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xFFA0C2A5),
-                            // color: Colors.blueGrey[300],
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: shadowList,
-                          ),
-                          margin: EdgeInsets.only(top: 50),
-                        ),
-                        Align(
-                          child: Hero(
-                              tag: 1,
-                              child: Image.asset('assets/images/monkey.png')),
-                          //child: Image.asset('assets/images/monkey.png')),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    //กรอบ2(สีขาว)
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 60, bottom: 20),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: shadowList,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  bottomRight: Radius.circular(20))),
-                        ),
-                        // Align(
-                        //   child: Text('ผัก'),
-                        // ),
-                        Align(
-                          //ทำให้อยู่ในช่องที่สร้างข้างบน
-                          alignment: Alignment(2.0, 0.65),
-                          child: new LinearPercentIndicator(
-                            width: 140.0,
-                            lineHeight: 15.0,
-                            percent: 0.5,
-                            center: Text(
-                              "50.0%",
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 11,
-                              ),
-                            ),
-                            progressColor: Colors.red[300],
-                            //backgroundColor: Colors.green[300],
-                          ),
-                        ),
-                        Align(
-                          //ทำให้อยู่ในช่องที่สร้างข้างบน
-                          alignment: Alignment(1.50, 0.75),
-                          child: FlatButton(
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.red[900],
-                                size: 30,
-                              ),
-                              onPressed: () => null),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Expanded(
-                  //     child: Stack(
-                  //   children: <Widget>[
-                  //     new LinearPercentIndicator(
-                  //       width: 100.0,
-                  //       lineHeight: 8.0,
-                  //       percent: 0.2,
-                  //       progressColor: Colors.red,
-                  //     ),
-                  //   ],
-                  // )),
-                ],
+    return Center(
+      child: AnimatedContainer(
+        transform: Matrix4.translationValues(xOffset, yOffset, 0)
+          ..scale(isDrawerOpen ? 0.85 : 1.00)
+          ..rotateZ(isDrawerOpen ? -50 : 0),
+        duration: Duration(milliseconds: 200),
+        decoration: BoxDecoration(
+          color: Color(0xFFA0C2A5),
+          borderRadius: isDrawerOpen
+              ? BorderRadius.circular(40)
+              : BorderRadius.circular(0),
+        ),
+        child: ListView(children: [
+          Column(
+            children: <Widget>[
+              SizedBox(
+                height: 50,
               ),
-            ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    isDrawerOpen
+                        ? GestureDetector(
+                            child:
+                                Icon(Icons.arrow_back_ios, color: Colors.white),
+                            onTap: () {
+                              setState(() {
+                                xOffset = 0;
+                                yOffset = 0;
+                                isDrawerOpen = false;
+                              });
+                            },
+                          )
+                        : GestureDetector(
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                xOffset = 290;
+                                yOffset = 80;
+                                isDrawerOpen = true;
+                              });
+                            },
+                          ),
+                    Text(
+                      'Too-Yen',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
+                    Container(),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Container(
+                height: 100,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: shadowList,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: FlatButton(
+                                child: Image.asset(
+                                    categories[index]['iconPath'],
+                                    height: 55,
+                                    width: 55),
+                                onPressed: () => null),
+                            //color: Colors.grey[700],
+                          ),
+                          Text(categories[index]
+                              ['name']) //ปรับตำแหน่งตัวอักษรด้วย
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Consumer(
+                  builder: (context, TooyenProvider provider, Widget child) {
+                var count = provider.tooyenList.length; //นับจำนวนข้อมูล
+                if (count <= 0) {
+                  return Center(
+                    child: Text(
+                      "ไม่พบข้อมูล",
+                      style: TextStyle(fontSize: 35),
+                    ),
+                  );
+                } else {
+                  return Container(
+                      height: 500,
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: count,
+                          itemBuilder: (context, int index) {
+                            Tooyen data = provider.tooyenList[index];
+                            return GestureDetector(
+                              child: Container(
+                                height: 220,
+                                margin: EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      //กรอบ1(สีเทา)
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              // color: Colors.blueGrey[300],
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              boxShadow: shadowList,
+                                            ),
+                                            margin: EdgeInsets.only(top: 50),
+                                          ),
+                                          Align(
+                                            child: Hero(
+                                                tag: 1,
+                                                child:
+                                                    Image.asset(data.imgPath)),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      //กรอบ2(สีขาว)
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 60, bottom: 20),
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: shadowList,
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20),
+                                                    bottomRight:
+                                                        Radius.circular(20))),
+                                          ),
+                                          Align(
+                                            child: Text(data.name),
+                                          ),
+                                          Align(
+                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                            alignment: Alignment(2.0, 0.65),
+                                            child: new LinearPercentIndicator(
+                                              width: 140.0,
+                                              lineHeight: 15.0,
+                                              percent: 0.5,
+                                              center: Text(
+                                                "50.0%",
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                              progressColor: Colors.red[300],
+                                              backgroundColor:
+                                                  Colors.green[300],
+                                            ),
+                                          ),
+                                          Align(
+                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                            alignment: Alignment(1.50, 0.75),
+                                            child: FlatButton(
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.red[900],
+                                                  size: 30,
+                                                ),
+                                                onPressed: () => null),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }));
+                }
+              }),
+
+              // GestureDetector(
+              //   child: Container(
+              //     height: 220,
+              //     margin: EdgeInsets.symmetric(horizontal: 20),
+              //     child: Row(
+              //       children: [
+              //         Expanded(
+              //           //กรอบ1(สีเทา)
+              //           child: Stack(
+              //             children: [
+              //               Container(
+              //                 decoration: BoxDecoration(
+              //                   color: Colors.white,
+              //                   // color: Colors.blueGrey[300],
+              //                   borderRadius: BorderRadius.circular(20),
+              //                   boxShadow: shadowList,
+              //                 ),
+              //                 margin: EdgeInsets.only(top: 50),
+              //               ),
+              //               Align(
+              //                 child: Hero(
+              //                     tag: 1,
+              //                     child: Image.asset('assets/images/monkey.png')),
+              //                 //child: Image.asset('assets/images/monkey.png')),
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //         Expanded(
+              //           //กรอบ2(สีขาว)
+              //           child: Stack(
+              //             children: [
+              //               Container(
+              //                 margin: EdgeInsets.only(top: 60, bottom: 20),
+              //                 decoration: BoxDecoration(
+              //                     color: Colors.white,
+              //                     boxShadow: shadowList,
+              //                     borderRadius: BorderRadius.only(
+              //                         topRight: Radius.circular(20),
+              //                         bottomRight: Radius.circular(20))),
+              //               ),
+              //               // Align(
+              //               //   child: Text('ผัก'),
+              //               // ),
+              //               Align(
+              //                 //ทำให้อยู่ในช่องที่สร้างข้างบน
+              //                 alignment: Alignment(2.0, 0.65),
+              //                 child: new LinearPercentIndicator(
+              //                   width: 140.0,
+              //                   lineHeight: 15.0,
+              //                   percent: 0.5,
+              //                   center: Text(
+              //                     "50.0%",
+              //                     style: TextStyle(
+              //                       color: Colors.black54,
+              //                       fontSize: 11,
+              //                     ),
+              //                   ),
+              //                   progressColor: Colors.red[300],
+              //                   //backgroundColor: Colors.green[300],
+              //                 ),
+              //               ),
+              //               Align(
+              //                 //ทำให้อยู่ในช่องที่สร้างข้างบน
+              //                 alignment: Alignment(1.50, 0.75),
+              //                 child: FlatButton(
+              //                     child: Icon(
+              //                       Icons.delete,
+              //                       color: Colors.red[900],
+              //                       size: 30,
+              //                     ),
+              //                     onPressed: () => null),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              //Test(),
+              SizedBox(
+                height: 50,
+              )
+            ],
           ),
-          //Test(),
-          SizedBox(
-            height: 50,
-          )
-        ],
+        ]),
       ),
     );
   }
@@ -253,6 +363,12 @@ class Test extends StatelessWidget {
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:mobile_application/Screens/Page/configuration.dart';
+// import 'package:percent_indicator/percent_indicator.dart';
+// import 'package:provider/provider.dart';
+// import 'package:mobile_application/models/tooyen.dart';
+// import 'package:mobile_application/providers/tooyen_provider.dart';
+// import 'package:intl/intl.dart';
+// import 'package:flutter/services.dart';
 
 // class HomeScreen extends StatefulWidget {
 //   @override
@@ -264,26 +380,31 @@ class Test extends StatelessWidget {
 //   double yOffset = 0;
 
 //   bool isDrawerOpen = false;
+//   void initState() {
+//     super.initState();
+//     Provider.of<TooyenProvider>(context, listen: false).initData();
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return AnimatedContainer(
+//     return
+//     AnimatedContainer(
 //       transform: Matrix4.translationValues(xOffset, yOffset, 0)
 //         ..scale(isDrawerOpen ? 0.85 : 1.00)
 //         ..rotateZ(isDrawerOpen ? -50 : 0),
 //       duration: Duration(milliseconds: 200),
 //       decoration: BoxDecoration(
-//           color: Colors.grey[200],
-//           borderRadius: isDrawerOpen
-//               ? BorderRadius.circular(40)
-//               : BorderRadius.circular(0)),
+//         color: Colors.grey[200],
+//         borderRadius:
+//             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
+//       ),
 //       child: Column(
 //         children: <Widget>[
 //           SizedBox(
 //             height: 50,
 //           ),
 //           Container(
-//              margin: EdgeInsets.symmetric(horizontal: 20),
+//             margin: EdgeInsets.symmetric(horizontal: 20),
 //             child: Row(
 //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //               children: <Widget>[
@@ -302,11 +423,12 @@ class Test extends StatelessWidget {
 //                         child: Icon(Icons.menu),
 //                         onTap: () {
 //                           setState(() {
-//                             xOffset = 230;
-//                             yOffset = 150;
+//                             xOffset = 290;
+//                             yOffset = 80;
 //                             isDrawerOpen = true;
 //                           });
-//                         }),
+//                         },
+//                       ),
 //                 Text(
 //                   'Too-Yen',
 //                   style: TextStyle(
@@ -319,10 +441,10 @@ class Test extends StatelessWidget {
 //             ),
 //           ),
 //           SizedBox(
-//             height: 20,
+//             height: 40,
 //           ),
 //           Container(
-//             height: 120,
+//             height: 100,
 //             child: ListView.builder(
 //               scrollDirection: Axis.horizontal,
 //               itemCount: categories.length,
@@ -332,17 +454,16 @@ class Test extends StatelessWidget {
 //                     children: [
 //                       Container(
 //                         padding: EdgeInsets.all(10),
-//                         margin: EdgeInsets.only(left: 20),
+//                         margin: EdgeInsets.only(left: 10),
 //                         decoration: BoxDecoration(
 //                             color: Colors.white,
 //                             boxShadow: shadowList,
-//                             borderRadius: BorderRadius.circular(10)),
-//                         child: Image.asset(
-//                           categories[index]['iconPath'],
-//                           height: 50,
-//                           width: 50,
-//                           //color: Colors.grey[700],
-//                         ),
+//                             borderRadius: BorderRadius.circular(20)),
+//                         child: FlatButton(
+//                             child: Image.asset(categories[index]['iconPath'],
+//                                 height: 55, width: 55),
+//                             onPressed: () => null),
+//                         //color: Colors.grey[700],
 //                       ),
 //                       Text(categories[index]['name']) //ปรับตำแหน่งตัวอักษรด้วย
 //                     ],
@@ -351,14 +472,9 @@ class Test extends StatelessWidget {
 //               },
 //             ),
 //           ),
-
 //           GestureDetector(
-//             // onTap: () {
-//             //   Navigator.push(context,
-//             //       MaterialPageRoute(builder: (context) => Screen2()));
-//             // },
 //             child: Container(
-//               height: 210,
+//               height: 220,
 //               margin: EdgeInsets.symmetric(horizontal: 20),
 //               child: Row(
 //                 children: [
@@ -368,7 +484,8 @@ class Test extends StatelessWidget {
 //                       children: [
 //                         Container(
 //                           decoration: BoxDecoration(
-//                             color: Colors.blueGrey[300],
+//                             color: Color(0xFFA0C2A5),
+//                             // color: Colors.blueGrey[300],
 //                             borderRadius: BorderRadius.circular(20),
 //                             boxShadow: shadowList,
 //                           ),
@@ -377,32 +494,121 @@ class Test extends StatelessWidget {
 //                         Align(
 //                           child: Hero(
 //                               tag: 1,
-//                               child: Image.asset('assets/images/turtle.png')),
+//                               child: Image.asset('assets/images/monkey.png')),
+//                           //child: Image.asset('assets/images/monkey.png')),
 //                         )
 //                       ],
 //                     ),
 //                   ),
 //                   Expanded(
-//                       //กรอบ2(สีขาว)
-//                       child: Container(
-//                     margin: EdgeInsets.only(top: 60, bottom: 20),
-//                     decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         boxShadow: shadowList,
-//                         borderRadius: BorderRadius.only(
-//                             topRight: Radius.circular(20),
-//                             bottomRight: Radius.circular(20))),
-//                   ))
+//                     //กรอบ2(สีขาว)
+//                     child: Stack(
+//                       children: [
+//                         Container(
+//                           margin: EdgeInsets.only(top: 60, bottom: 20),
+//                           decoration: BoxDecoration(
+//                               color: Colors.white,
+//                               boxShadow: shadowList,
+//                               borderRadius: BorderRadius.only(
+//                                   topRight: Radius.circular(20),
+//                                   bottomRight: Radius.circular(20))),
+//                         ),
+//                         // Align(
+//                         //   child: Text('ผัก'),
+//                         // ),
+//                         Align(
+//                           //ทำให้อยู่ในช่องที่สร้างข้างบน
+//                           alignment: Alignment(2.0, 0.65),
+//                           child: new LinearPercentIndicator(
+//                             width: 140.0,
+//                             lineHeight: 15.0,
+//                             percent: 0.5,
+//                             center: Text(
+//                               "50.0%",
+//                               style: TextStyle(
+//                                 color: Colors.black54,
+//                                 fontSize: 11,
+//                               ),
+//                             ),
+//                             progressColor: Colors.red[300],
+//                             //backgroundColor: Colors.green[300],
+//                           ),
+//                         ),
+//                         Align(
+//                           //ทำให้อยู่ในช่องที่สร้างข้างบน
+//                           alignment: Alignment(1.50, 0.75),
+//                           child: FlatButton(
+//                               child: Icon(
+//                                 Icons.delete,
+//                                 color: Colors.red[900],
+//                                 size: 30,
+//                               ),
+//                               onPressed: () => null),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   // Expanded(
+//                   //     child: Stack(
+//                   //   children: <Widget>[
+//                   //     new LinearPercentIndicator(
+//                   //       width: 100.0,
+//                   //       lineHeight: 8.0,
+//                   //       percent: 0.2,
+//                   //       progressColor: Colors.red,
+//                   //     ),
+//                   //   ],
+//                   // )),
 //                 ],
 //               ),
 //             ),
 //           ),
-
+//           //Test(),
 //           SizedBox(
 //             height: 50,
 //           )
 //         ],
 //       ),
 //     );
+//   }
+// }
+
+// class Test extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(body: Consumer(
+//       builder: (context, TooyenProvider provider, Widget child) {
+//         var count = provider.tooyenList.length; //นับจำนวนข้อมูล
+//         if (count <= 0) {
+//           return Center(
+//             child: Text(
+//               "ไม่พบข้อมูล",
+//               style: TextStyle(fontSize: 35),
+//             ),
+//           );
+//         } else {
+//           return ListView.builder(
+//               itemCount: count,
+//               itemBuilder: (context, int index) {
+//                 Tooyen data = provider.tooyenList[index];
+//                 return Card(
+//                   elevation: 5,
+//                   margin:
+//                       const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+//                   child: ListTile(
+//                     leading: CircleAvatar(
+//                       radius: 30,
+//                       child: FittedBox(
+//                         child: Text(data.category),
+//                       ),
+//                     ),
+//                     title: Text(data.name),
+//                     subtitle: Text(DateFormat("dd/MM/yyyy").format(data.date)),
+//                   ),
+//                 );
+//               });
+//         }
+//       },
+//     ));
 //   }
 // }
