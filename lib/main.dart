@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mobile_application/Screens/Login/login_screen.dart';
 import 'package:mobile_application/Screens/home.dart';
 import 'package:mobile_application/constants.dart';
-import 'package:mobile_application/DateTimePicker.dart';
+// import 'package:mobile_application/DateTimePicker.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
-
+import 'package:mobile_application/Screens/Page/add_from.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import 'package:mobile_application/Screens/Login/login_screen.dart';
@@ -66,20 +66,20 @@ class _MyHomePageState extends State<MyHomePage> {
         body: 
         
         TabBarView(
-          children: [RouteHome(),DateTimePicker()],
+          children: [RouteHome(),RouteAdd()],
         ),
-        // bottomNavigationBar: TabBar(
-        //   tabs: [
-        //     Tab(
-        //       icon: Icon(Icons.list),
-        //       text: "Home",
-        //     ),
-        //     Tab(
-        //       icon: Icon(Icons.add),
-        //       text: "Add"
-        //       )
-        //   ],
-        // ),
+        bottomNavigationBar: TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(Icons.list),
+              text: "Home",
+            ),
+            Tab(
+              icon: Icon(Icons.add),
+              text: "Add"
+              )
+          ],
+        ),
       ),
     );
   }
