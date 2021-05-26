@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return  Center(
       
-        child: SafeArea(
+        // child: SafeArea(
           // minimum: const EdgeInsets.all(15.0),
           child: AnimatedContainer(
           transform: Matrix4.translationValues(xOffset, yOffset, 0)
@@ -47,7 +47,8 @@ class _HomeState extends State<Home> {
             borderRadius:
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
           ),
-          child: Column(
+          child: ListView(
+            // scrollDirection: Axis.vertical,
             children: <Widget>[
                         SizedBox(
                           height: 50,
@@ -133,17 +134,20 @@ class _HomeState extends State<Home> {
                             );
                           } else {
                             return ListView.builder(
+                                  physics: ClampingScrollPhysics(),
                                   shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
                                   itemCount: count,
                                   itemBuilder: (context, int index) {
                                     Tooyen data = provider.tooyenList[index];
-                                    return 
-                                    GestureDetector(
+                                    return Container(
+
+                                      child: GestureDetector(
                                       
-                                      child: 
                                       
+                                        child: 
                                       Container(
-                                        
+                                        // padding: EdgeInsets.all(10),
                                         height: 220,
                                         margin: EdgeInsets.symmetric(horizontal: 20),
                                         child: Row(
@@ -187,9 +191,10 @@ class _HomeState extends State<Home> {
                                                   ),
                                                   Align(
                                                     //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                                    
                                                     alignment: Alignment(2.0, 0.65),
                                                     child: new LinearPercentIndicator(
-                                                      width: 140.0,
+                                                      width: 100.0,
                                                       lineHeight: 15.0,
                                                       percent: 0.5,
                                                       center: Text(
@@ -200,7 +205,7 @@ class _HomeState extends State<Home> {
                                                         ),
                                                       ),
                                                       progressColor: Colors.red[300],
-                                                      backgroundColor: Colors.green[300],
+                                                      // backgroundColor: Colors.green[300],
                                                     ),
                                                   ),
                                                   Align(
@@ -214,14 +219,22 @@ class _HomeState extends State<Home> {
                                                         ),
                                                         onPressed: () => null),
                                                   ),
+                                                 
                                                 ],
+                                                
                                               ),
+                                              
                                             ),
                                             
                                           ],
                                         ),
                                       ),
+                                      )
+                                      
+                                      
+                                  
                                     );
+                                    
                                     
                                   });
                               }
@@ -231,7 +244,7 @@ class _HomeState extends State<Home> {
         ),
         
         
-        ),
+        // ),
         
       );
       

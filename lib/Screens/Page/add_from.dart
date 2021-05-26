@@ -81,264 +81,264 @@ class _AddFromState extends State<AddFrom> {
         borderRadius:
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
       ),
-      child: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    isDrawerOpen
-                        ? GestureDetector(
-                            child: Icon(Icons.arrow_back_ios),
-                            onTap: () {
-                              setState(() {
-                                xOffset = 0;
-                                yOffset = 0;
-                                isDrawerOpen = false;
-                              });
-                            },
-                          )
-                        : GestureDetector(
-                            child: Icon(Icons.menu),
-                            onTap: () {
-                              setState(() {
-                                xOffset = 290;
-                                yOffset = 80;
-                                isDrawerOpen = true;
-                              });
-                            },
-                          ),
-                    Text(
-                      'เพิ่มข้อมูล',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          decoration: TextDecoration.none),
-                    ),
-                    Container(),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Column(
+      // child: SingleChildScrollView(
+        child: Form(key: formKey ,
+              child: ListView(
+
+          children: <Widget>[
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SvgPicture.asset(
-                    "assets/icons/ing.svg",
-                    height: size.height * 0.24,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    alignment: Alignment(-0.52, 0.75),
-                    child: Text(
-                      'ชื่อวัตถุดิบ',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black87,
-                          letterSpacing: 0.5),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    children: <Widget>[
-                      RoundedInputField(
-                        hintText: "เนื้อหมู/นมวัว...",
-                        icon: Icons.add,
-                        onChanged: (value) {
-                          setState(() {
-                            _ingredientsValue = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment(-0.25, 0.75),
-                        child: Text(
-                          'วันที่หมดอายุ : เดือน-วัน-ปี',
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.black87,
-                              letterSpacing: 0.5),
+                  isDrawerOpen
+                      ? GestureDetector(
+                          child: Icon(Icons.arrow_back_ios),
+                          onTap: () {
+                            setState(() {
+                              xOffset = 0;
+                              yOffset = 0;
+                              isDrawerOpen = false;
+                            });
+                          },
+                        )
+                      : GestureDetector(
+                          child: Icon(Icons.menu),
+                          onTap: () {
+                            setState(() {
+                              xOffset = 290;
+                              yOffset = 80;
+                              isDrawerOpen = true;
+                            });
+                          },
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _selectDate(context);
-                        },
-                        child: Container(
-                          width: _width / 1.5,
-                          height: _height / 15,
-                          margin: EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.white60,
-                            borderRadius: BorderRadius.circular(29),
-                          ),
-                          child: TextFormField(
-                            style: TextStyle(fontSize: 20),
-                            textAlign: TextAlign.center,
-                            enabled: false,
-                            keyboardType: TextInputType.text,
-                            controller: _dateController,
-                            onSaved: (String val) {
-                              _setDate = val;
-                            },
-                            decoration: InputDecoration(
-                                disabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                // labelText: 'Time',
-                                contentPadding: EdgeInsets.only(top: 0.0)),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'เพิ่มข้อมูล',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
                   ),
-                  SizedBox(
-                    height: 20,
+                  Container(),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Column(
+              children: <Widget>[
+                SvgPicture.asset(
+                  "assets/icons/ing.svg",
+                  height: size.height * 0.24,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  alignment: Alignment(-0.52, 0.75),
+                  child: Text(
+                    'ชื่อวัตถุดิบ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.black87,
+                        letterSpacing: 0.5),
                   ),
-                  Container(
-                    alignment: Alignment(-0.44, 0.75),
-                    child: Text(
-                      'หมวดหมู่วัตถุดิบ',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black87,
-                          letterSpacing: 0.5),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: DropdownButton<String>(
-                      value: _categoryValue,
-                      // underline: Container(
-                      //   color: Colors.blue,
-                      // ),
-                      //dropdownColor: Colors.white,
-                      icon: Icon(Icons.arrow_downward),
-                      iconSize: 20.0,
-                      iconEnabledColor: kPrimaryColor,
-                      items: <String>[
-                        'vegetables',
-                        'meat',
-                        'fruit',
-                        'skincare',
-                        'egg',
-                        'seasoning',
-                        'dessert',
-                        'drink'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      hint: Text(
-                        "หมวดหมู่",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      onChanged: (String value) {
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  children: <Widget>[
+                    RoundedInputField(
+                      hintText: "เนื้อหมู/นมวัว...",
+                      icon: Icons.add,
+                      onChanged: (value) {
                         setState(() {
-                          _categoryValue = value;
-                          _ingredientsValue = _ingredientsValue;
+                          _ingredientsValue = value;
                         });
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 36,
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        width: _width / 2,
-                        height: _height / 14,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(29),
-                            child: FlatButton(
-                              child: Text(
-                                "เพิ่มข้อมูล",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ),
-                              color: kPrimaryColor,
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 40),
-                              textColor: Colors.white,
-                              onPressed: () {
-                                if (formKey.currentState.validate()) {
-                                  var name = _ingredientsValue;
-                                  var category = _categoryValue;
-
-                                  //เตรียมข้อมูล
-                                  Tooyen tooyenList = Tooyen(
-                                      id: uuid.v4(),
-                                      name: name,
-                                      category: category,
-                                      date: selectedDate,
-                                      imgPath:
-                                          "assets/images/" + category + ".png"
-                                      // date: DateTime.now()
-                                      ); //object
-
-                                  //เรียก Provider
-                                  var provider = Provider.of<TooyenProvider>(
-                                      context,
-                                      listen: false);
-                                  provider.addTooyen(tooyenList);
-                                  noti.showNotificationDaily(
-                                      name, selectedDate);
-                                  //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
-                                  // provider.delTooyen();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          fullscreenDialog: true,
-                                          builder: (context) {
-                                            return RouteHome();
-                                          }));
-                                }
-                              },
-                            )),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment(-0.25, 0.75),
+                      child: Text(
+                        'วันที่หมดอายุ : เดือน-วัน-ปี',
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.black87,
+                            letterSpacing: 0.5),
                       ),
-                    ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      child: Container(
+                        width: _width / 1.5,
+                        height: _height / 15,
+                        margin: EdgeInsets.only(top: 10),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.white60,
+                          borderRadius: BorderRadius.circular(29),
+                        ),
+                        child: TextFormField(
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                          enabled: false,
+                          keyboardType: TextInputType.text,
+                          controller: _dateController,
+                          onSaved: (String val) {
+                            _setDate = val;
+                          },
+                          decoration: InputDecoration(
+                              disabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide.none),
+                              // labelText: 'Time',
+                              contentPadding: EdgeInsets.only(top: 0.0)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  alignment: Alignment(-0.44, 0.75),
+                  child: Text(
+                    'หมวดหมู่วัตถุดิบ',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.black87,
+                        letterSpacing: 0.5),
                   ),
-                  //   RoundedButton(
-                  //       text: "Add", press: () {}, color: Color(0xFF5F9D6E)),
-                ],
-              )
-            ],
-          ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: DropdownButton<String>(
+                    value: _categoryValue,
+                    // underline: Container(
+                    //   color: Colors.blue,
+                    // ),
+                    //dropdownColor: Colors.white,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 20.0,
+                    iconEnabledColor: kPrimaryColor,
+                    items: <String>[
+                      'vegetables',
+                      'meat',
+                      'fruit',
+                      'skincare',
+                      'egg',
+                      'seasoning',
+                      'dessert',
+                      'drink'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    hint: Text(
+                      "หมวดหมู่",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onChanged: (String value) {
+                      setState(() {
+                        _categoryValue = value;
+                        _ingredientsValue = _ingredientsValue;
+                      });
+                    },
+                  ),
+                ),
+                // SizedBox(
+                //   height: 36,
+                // ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: _width / 2,
+                      height: _height / 14,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(29),
+                          child: FlatButton(
+                            child: Text(
+                              "เพิ่มข้อมูล",
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                            color: kPrimaryColor,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 40),
+                            textColor: Colors.white,
+                            onPressed: () {
+                              if (formKey.currentState.validate()) {
+                                var name = _ingredientsValue;
+                                var category = _categoryValue;
+
+                                //เตรียมข้อมูล
+                                Tooyen tooyenList = Tooyen(
+                                    id: uuid.v4(),
+                                    name: name,
+                                    category: category,
+                                    date: selectedDate,
+                                    imgPath:
+                                        "assets/images/" + category + ".png"
+                                    // date: DateTime.now()
+                                    ); //object
+
+                                //เรียก Provider
+                                var provider = Provider.of<TooyenProvider>(
+                                    context,
+                                    listen: false);
+                                provider.addTooyen(tooyenList);
+                                noti.showNotificationDaily(name, selectedDate);
+                                //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
+                                // provider.delTooyen();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        fullscreenDialog: true,
+                                        builder: (context) {
+                                          return RouteHome();
+                                        }));
+                              }
+                            },
+                          )),
+                    ),
+                  ],
+                ),
+                //   RoundedButton(
+                //       text: "Add", press: () {}, color: Color(0xFF5F9D6E)),
+              ],
+            )
+          ],
         ),
-      ),
+              ),
+        
+      // ),
     );
   }
 }
