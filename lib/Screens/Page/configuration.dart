@@ -6,20 +6,18 @@ List<BoxShadow> shadowList = [
 ];
 
 List<Map> categories = [
-  {'name': 'Fox', 'iconPath': 'assets/images/fox.png'},
-  {'name': 'Fish', 'iconPath': 'assets/images/fish.png'},
-  {'name': 'Cat', 'iconPath': 'assets/images/cat.png'},
-  {'name': 'Dog', 'iconPath': 'assets/images/dog.png'},
-  {'name': 'Owl', 'iconPath': 'assets/images/owl.png'}
+  {'name': 'Vegetables', 'iconPath': 'assets/images/Vegetables.png'},
+  {'name': 'Skincare', 'iconPath': 'assets/images/skincare.png'},
+  {'name': 'Meat', 'iconPath': 'assets/images/meat.png'},
+  {'name': 'Seasoning', 'iconPath': 'assets/images/seasoning.png'},
+  {'name': 'Fruit', 'iconPath': 'assets/images/fruit.png'},
+  {'name': 'Egg', 'iconPath': 'assets/images/egg.png'},
+  {'name': 'Dessert', 'iconPath': 'assets/images/dessert.png'},
+  {'name': 'Drink', 'iconPath': 'assets/images/drink.png'}
 ];
 
-List<Map> drawerItems=[
-  {
-    'icon': Icons.home,
-    'title' : 'Home'
-  },
-  {
-    'icon': Icons.add,
-    'title' : 'Add'
-  },
-];
+// List<Map> drawerItems = [
+//   {'icon': Icons.home, 'title': 'Home'},
+//   {'icon': Icons.add, 'title': 'Add'},
+//   {'icon': Icons.list_alt, 'title': 'Buying list'},
+// ];

@@ -7,6 +7,7 @@ import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,10 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: AnimatedContainer(
         transform: Matrix4.translationValues(xOffset, yOffset, 0)
           ..scale(isDrawerOpen ? 0.85 : 1.00)
-          ..rotateZ(isDrawerOpen ? -50 : 0),
+          ..rotateZ(isDrawerOpen ? 0 : 0),
         duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: Color(0xFFA0C2A5),
+          color: Colors.grey[200],
+          //color: Color(0xFFA0C2A5),
           borderRadius: isDrawerOpen
               ? BorderRadius.circular(40)
               : BorderRadius.circular(0),
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     isDrawerOpen
                         ? GestureDetector(
                             child:
-                                Icon(Icons.arrow_back_ios, color: Colors.white),
+                                Icon(Icons.arrow_back_ios, color: Colors.black),
                             onTap: () {
                               setState(() {
                                 xOffset = 0;
@@ -63,11 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         : GestureDetector(
                             child: Icon(
                               Icons.menu,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                             onTap: () {
                               setState(() {
-                                xOffset = 290;
+                                xOffset = 200;
                                 yOffset = 80;
                                 isDrawerOpen = true;
                               });
@@ -75,10 +77,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                     Text(
                       'Too-Yen',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            decoration: TextDecoration.none),
+                      ),
                     ),
                     Container(),
                   ],
@@ -111,8 +116,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () => null),
                             //color: Colors.grey[700],
                           ),
-                          Text(categories[index]
-                              ['name']) //ปรับตำแหน่งตัวอักษรด้วย
+                          Text(
+                            categories[index]['name'],
+                            style: GoogleFonts.raleway(
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ) //ปรับตำแหน่งตัวอักษรด้วย
                         ],
                       ),
                     );
@@ -125,8 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (count <= 0) {
                   return Center(
                     child: Text(
-                      "ไม่พบข้อมูล",
-                      style: TextStyle(fontSize: 35),
+                      "Empty",
+                      style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   );
                 } else {
@@ -150,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color: Color(0xFFA0C2A5),
                                               // color: Colors.blueGrey[300],
                                               borderRadius:
                                                   BorderRadius.circular(20),
@@ -159,10 +178,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             margin: EdgeInsets.only(top: 50),
                                           ),
                                           Align(
+                                            alignment: Alignment(0.0, 0.5),
                                             child: Hero(
                                                 tag: 1,
-                                                child:
-                                                    Image.asset(data.imgPath)),
+                                                child: Image.asset(data.imgPath,
+                                                    height: 130,
+                                                    width: 130,
+                                                    fit: BoxFit
+                                                        .fitWidth)), //ปรับขนาด
                                           )
                                         ],
                                       ),
@@ -184,30 +207,70 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         Radius.circular(20))),
                                           ),
                                           Align(
-                                            child: Text(data.name),
+                                            alignment: Alignment(-0.8, -0.1),
+                                            child: Text(
+                                              data.name,
+                                              style: GoogleFonts.raleway(
+                                                textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 28,
+                                                    fontWeight: FontWeight.w500,
+                                                    decoration:
+                                                        TextDecoration.none),
+                                              ),
+                                            ),
                                           ),
                                           Align(
-                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
-                                            alignment: Alignment(2.0, 0.65),
-                                            child: new LinearPercentIndicator(
-                                              width: 140.0,
-                                              lineHeight: 15.0,
-                                              percent: 0.5,
-                                              center: Text(
-                                                "50.0%",
-                                                style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 11,
+                                            alignment: Alignment(-0.7, 0.45),
+                                            child: Text(
+                                              'EXP : ' +
+                                                  DateFormat("dd/MM/yyyy")
+                                                      .format(data.date),
+                                              style: GoogleFonts.raleway(
+                                                textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w300,
                                                 ),
                                               ),
-                                              progressColor: Colors.red[300],
-                                              backgroundColor:
-                                                  Colors.green[300],
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment(-0.7, 0.27),
+                                            child: Text(
+                                              'Catrgory : ' + data.category,
+                                              style: GoogleFonts.raleway(
+                                                textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                           Align(
                                             //ทำให้อยู่ในช่องที่สร้างข้างบน
-                                            alignment: Alignment(1.50, 0.75),
+                                            alignment: Alignment(-0.9, 0.70),
+                                            child: new LinearPercentIndicator(
+                                              width: 150.0,
+                                              lineHeight: 15.0,
+                                              percent: 0.5,
+                                              center: Text(
+                                                "50.0%",
+                                                style: GoogleFonts.raleway(
+                                                  textStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ),
+                                              progressColor: Colors.red[300],
+                                            ),
+                                          ),
+                                          Align(
+                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                            alignment: Alignment(1.5, 0.80),
                                             child: FlatButton(
                                                 child: Icon(
                                                   Icons.delete,

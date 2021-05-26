@@ -13,7 +13,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Color(0xFFA0C2A5),
       child: Padding(
         padding: EdgeInsets.only(top: 50, left: 40, bottom: 70),
         child: Column(
@@ -26,7 +26,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     borderRadius: BorderRadius.circular(20),
                     child: Image(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/Group.jpg'),
+                      image: AssetImage('assets/images/logo.png'),
                     ),
                   ),
                 ),
@@ -66,6 +66,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   FlatButton(
                       //color: Colors.red[300],
                       child: Text("Add",
+                          style: TextStyle(color: Colors.black, fontSize: 17)),
+                      onPressed: () => navigateToAddPage(context)),
+                ]),
+                Row(children: <Widget>[
+                  Icon(
+                    Icons.list_alt,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                  FlatButton(
+                      //color: Colors.red[300],
+                      child: Text("Buying list",
                           style: TextStyle(color: Colors.black, fontSize: 17)),
                       onPressed: () => navigateToAddPage(context)),
                 ]),
