@@ -1,5 +1,5 @@
 class Tooyen{
-  String id;
+  int id;
   String name;//ชื่อรายการ
   String category;//จำนวนเงิน
   DateTime date;//วันที่ เวลา บันทึกรายการ

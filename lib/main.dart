@@ -68,18 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
         TabBarView(
           children: [RouteHome(),RouteAdd()],
         ),
-        bottomNavigationBar: TabBar(
-          tabs: [
-            Tab(
-              icon: Icon(Icons.list),
-              text: "Home",
-            ),
-            Tab(
-              icon: Icon(Icons.add),
-              text: "Add"
-              )
-          ],
-        ),
+        // bottomNavigationBar: TabBar(
+        //   tabs: [
+        //     Tab(
+        //       icon: Icon(Icons.list),
+        //       text: "Home",
+        //     ),
+        //     Tab(
+        //       icon: Icon(Icons.add),
+        //       text: "Add"
+        //       )
+        //   ],
+        // ),
       ),
     );
   }

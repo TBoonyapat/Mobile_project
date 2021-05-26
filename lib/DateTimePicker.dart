@@ -254,7 +254,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                           
                           //เตรียมข้อมูล
                           Tooyen tooyenList = Tooyen(
-                            id:uuid.v4(),
+                            id:1234,
                             name: name,
                             category :category,
                             date : selectedDate,
@@ -265,7 +265,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                           //เรียก Provider 
                           var provider = Provider.of<TooyenProvider>(context,listen:false);
                           provider.addTooyen(tooyenList);
-                          noti.showNotificationDaily(name, selectedDate);
+                          noti.showNotificationDaily(1234,name, selectedDate);
                           //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
                           // provider.delTooyen();
                           Navigator.push(context, MaterialPageRoute(

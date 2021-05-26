@@ -11,6 +11,7 @@ import 'package:mobile_application/noti/notification_service.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
+import 'dart:math';
 
 class AddFrom extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _AddFromState extends State<AddFrom> {
   String _hour, _minute, _time;
   var uuid = Uuid();
   bool isDrawerOpen = false;
-
+  Random random = new Random();
   DateTime selectedDate = DateTime.now().add(const Duration(days: 1));
   TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
   TextEditingController _ingredientsController = TextEditingController();
@@ -297,10 +298,16 @@ class _AddFromState extends State<AddFrom> {
                               if (formKey.currentState.validate()) {
                                 var name = _ingredientsValue;
                                 var category = _categoryValue;
+                                var now = new DateTime.now();
+                                Random rnd1 = new Random(selectedDate.year);
+                                Random rnd2 = new Random(now.millisecondsSinceEpoch);
+                                int rnd3 = rnd2.nextInt(100000000); 
+                                int rnd4 = rnd1.nextInt(100000000); 
+                                int _id = rnd4+rnd3;
 
                                 //เตรียมข้อมูล
                                 Tooyen tooyenList = Tooyen(
-                                    id: uuid.v4(),
+                                    id: _id,
                                     name: name,
                                     category: category,
                                     date: selectedDate,
@@ -314,7 +321,7 @@ class _AddFromState extends State<AddFrom> {
                                     context,
                                     listen: false);
                                 provider.addTooyen(tooyenList);
-                                noti.showNotificationDaily(name, selectedDate);
+                                noti.showNotificationDaily(_id,name, selectedDate);
                                 //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
                                 // provider.delTooyen();
                                 Navigator.push(

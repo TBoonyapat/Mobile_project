@@ -12,6 +12,10 @@ import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/databases/tooyen_db.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:mobile_application/providers/tooyen_provider.dart';
+import 'package:mobile_application/models/tooyen.dart';
+import 'package:mobile_application/noti/notification_service.dart';
+import 'package:mobile_application/Screens/sidebar_layout.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,15 +23,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+   final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
-
+  // List tooyenList = [];
   bool isDrawerOpen = false;
     @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<TooyenProvider>(context,listen: false).initData();
+     Provider.of<TooyenProvider>(context,listen: false).initData();
   }
 
   @override
@@ -39,11 +44,11 @@ class _HomeState extends State<Home> {
           child: AnimatedContainer(
           transform: Matrix4.translationValues(xOffset, yOffset, 0)
             ..scale(isDrawerOpen ? 0.85 : 1.00)
-            ..rotateZ(isDrawerOpen ? -50 : 0),
+            ..rotateZ(isDrawerOpen ? 0 : 0),
           duration: Duration(milliseconds: 200),
             decoration: BoxDecoration(
-            // color: Colors.grey[200],
-            color : Color(0xFFA0C2A5),
+            color: Colors.grey[200],
+            // color : Color(0xFFA0C2A5),
             borderRadius:
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
           ),
@@ -73,7 +78,7 @@ class _HomeState extends State<Home> {
                                       child: Icon(Icons.menu),
                                       onTap: () {
                                         setState(() {
-                                          xOffset = 290;
+                                          xOffset = 200;
                                           yOffset = 80;
                                           isDrawerOpen = true;
                                         });
@@ -81,7 +86,9 @@ class _HomeState extends State<Home> {
                                     ),
                               Text(
                                 'Too-Yen',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
+                                    
                                     fontSize: 20,
                                     color: Colors.black,
                                     decoration: TextDecoration.none),
@@ -91,7 +98,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 10,
                         ),
                         Container(
                                 height: 100,
@@ -133,6 +140,7 @@ class _HomeState extends State<Home> {
                               ),
                             );
                           } else {
+                            
                             return ListView.builder(
                                   physics: ClampingScrollPhysics(),
                                   shrinkWrap: true,
@@ -140,6 +148,7 @@ class _HomeState extends State<Home> {
                                   itemCount: count,
                                   itemBuilder: (context, int index) {
                                     Tooyen data = provider.tooyenList[index];
+                                    
                                     return Container(
 
                                       child: GestureDetector(
@@ -175,6 +184,7 @@ class _HomeState extends State<Home> {
                                             ),
                                             Expanded(
                                               //กรอบ2(สีขาว)
+                                              
                                               child: Stack(
                                                 children: [
                                                   Container(
@@ -186,8 +196,10 @@ class _HomeState extends State<Home> {
                                                             topRight: Radius.circular(20),
                                                             bottomRight: Radius.circular(20))),
                                                   ),
+                                                  
                                                   Align(
-                                                    child: Text(data.name),
+                                                    child: Text(DateFormat("dd/MM/yyyy").format(data.date)),
+                                                    
                                                   ),
                                                   Align(
                                                     //ทำให้อยู่ในช่องที่สร้างข้างบน
@@ -217,7 +229,19 @@ class _HomeState extends State<Home> {
                                                           color: Colors.red[900],
                                                           size: 30,
                                                         ),
-                                                        onPressed: () => null),
+                                                        onPressed: ()  {
+                                                          
+                                                          provider.delIng(data.id);
+                                                           noti.removeReminder(data.id);
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  fullscreenDialog: true,
+                                                                  builder: (context) {
+                                                                    return RouteHome();
+                                                                  }));
+                                                        }
+                                                        ),
                                                   ),
                                                  
                                                 ],
