@@ -97,10 +97,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Add new ingredients'),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text('Add new ingredients'),
+      // ),
       body: Container(
         color: Color(0xFFFFFFFF),
         width: _width,

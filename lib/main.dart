@@ -64,7 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         backgroundColor: kPrimaryColor,
         body: 
-        
         TabBarView(
           children: [RouteHome(),RouteAdd()],
         ),

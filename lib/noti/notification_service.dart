@@ -89,11 +89,14 @@ class NotificationManager {
     var iOSPlatformChannelSpecifics =
     new IOSNotificationDetails();
 
-    
+    // await flutterLocalNotificationsPlugin.show(
+    //     0, 'Too Yen', 'มีสิ่งของในตู้เย็นหมดอายุ', _notificationDetails,
+    //     payload: 'New Patload');
+    // NotificationDetails platformChannelSpecifics = new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.schedule(
     id,
-    name,
-    'มีวัตถุดิบใกล้จะหมดอายุ!',
+    'Too Yen',
+    name+'กำลังจะหมดอายุ!',
     scheduledNotificationDateTime,
     _notificationDetails);
 

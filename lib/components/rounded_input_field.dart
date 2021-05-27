@@ -17,12 +17,7 @@ class RoundedInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter some text';
-    }
-    return null;
-  },
+        
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
@@ -32,6 +27,7 @@ class RoundedInputField extends StatelessWidget {
           ),
           hintText: hintText,
           border: InputBorder.none,
+         
         ),
       ),
     );

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_application/Screens/Page/add_from.dart';
-import './Home/drawer_screen.dart';
+import 'Page/drawer_screen.dart';
 import '../Screens/Page/home_screen.dart';
+import 'package:mobile_application/Screens/Page/buying_list.dart';
 import '../Screens/home.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:mobile_application/DateTimePicker.dart';
 
 class RouteHome extends StatelessWidget {
   @override
@@ -13,8 +15,11 @@ class RouteHome extends StatelessWidget {
         children: [
           //SideBarLayout()
           DrawerScreen(),
-          Home(),
-          //AddFrom()
+          //Home()
+          HomeScreen()
+          //DateTimePicker()
+          //Home(),
+          // AddFrom()
         ],
       ),
     );
@@ -29,6 +34,20 @@ class RouteAdd extends StatelessWidget {
         children: [
           DrawerScreen(),
           AddFrom(),
+        ],
+      ),
+    );
+  }
+}
+
+class RouteBuying extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          DrawerScreen(),
+          BuyingList(),
         ],
       ),
     );

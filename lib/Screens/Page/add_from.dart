@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:mobile_application/components/rounded_input_field.dart';
 import 'package:mobile_application/components/text_field_container.dart';
 import 'package:mobile_application/constants.dart';
-import 'package:mobile_application/components/rounded_button.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -11,6 +9,7 @@ import 'package:mobile_application/noti/notification_service.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 
 class AddFrom extends StatefulWidget {
@@ -75,7 +74,7 @@ class _AddFromState extends State<AddFrom> {
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
         ..scale(isDrawerOpen ? 0.85 : 1.00)
-        ..rotateZ(isDrawerOpen ? -50 : 0),
+        ..rotateZ(isDrawerOpen ? 0 : 0),
       duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -83,9 +82,9 @@ class _AddFromState extends State<AddFrom> {
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
       ),
       // child: SingleChildScrollView(
-        child: Form(key: formKey ,
-              child: ListView(
-
+      child: Form(
+        key: formKey,
+        child: ListView(
           children: <Widget>[
             SizedBox(
               height: 50,
@@ -97,7 +96,10 @@ class _AddFromState extends State<AddFrom> {
                 children: <Widget>[
                   isDrawerOpen
                       ? GestureDetector(
-                          child: Icon(Icons.arrow_back_ios),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                          ),
                           onTap: () {
                             setState(() {
                               xOffset = 0;
@@ -107,21 +109,27 @@ class _AddFromState extends State<AddFrom> {
                           },
                         )
                       : GestureDetector(
-                          child: Icon(Icons.menu),
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                          ),
                           onTap: () {
                             setState(() {
-                              xOffset = 290;
+                              xOffset = 200;
                               yOffset = 80;
                               isDrawerOpen = true;
                             });
                           },
                         ),
                   Text(
-                    'เพิ่มข้อมูล',
-                    style: TextStyle(
-                        fontSize: 20,
+                    'Add Ingredients',
+                    style: GoogleFonts.raleway(
+                      textStyle: TextStyle(
                         color: Colors.black,
-                        decoration: TextDecoration.none),
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                   Container(),
                 ],
@@ -142,11 +150,16 @@ class _AddFromState extends State<AddFrom> {
                 Container(
                   alignment: Alignment(-0.52, 0.75),
                   child: Text(
-                    'ชื่อวัตถุดิบ',
-                    style: TextStyle(
+                    "Name's Ingredients",
+                    style: GoogleFonts.raleway(
+                      textStyle: TextStyle(
+                        color: Colors.black,
                         fontSize: 17,
-                        color: Colors.black87,
-                        letterSpacing: 0.5),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    // style: TextStyle(
+                    //     fontSize: 17, color: Colors.black, letterSpacing: 0.5),
                   ),
                 ),
                 SizedBox(
@@ -155,7 +168,7 @@ class _AddFromState extends State<AddFrom> {
                 Column(
                   children: <Widget>[
                     RoundedInputField(
-                      hintText: "เนื้อหมู/นมวัว...",
+                      hintText: "example: egg/milk...",
                       icon: Icons.add,
                       onChanged: (value) {
                         setState(() {
@@ -173,11 +186,14 @@ class _AddFromState extends State<AddFrom> {
                     Container(
                       alignment: Alignment(-0.25, 0.75),
                       child: Text(
-                        'วันที่หมดอายุ : เดือน-วัน-ปี',
-                        style: TextStyle(
+                        'Expiration Date : mm-dd-yyyy',
+                        style: GoogleFonts.raleway(
+                          textStyle: TextStyle(
+                            color: Colors.black,
                             fontSize: 17,
-                            color: Colors.black87,
-                            letterSpacing: 0.5),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -193,7 +209,7 @@ class _AddFromState extends State<AddFrom> {
                         margin: EdgeInsets.only(top: 10),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.white60,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(29),
                         ),
                         child: TextFormField(
@@ -219,13 +235,16 @@ class _AddFromState extends State<AddFrom> {
                   height: 20,
                 ),
                 Container(
-                  alignment: Alignment(-0.44, 0.75),
+                  alignment: Alignment(-0.64, 0.75),
                   child: Text(
-                    'หมวดหมู่วัตถุดิบ',
-                    style: TextStyle(
+                    'Category',
+                    style: GoogleFonts.raleway(
+                      textStyle: TextStyle(
+                        color: Colors.black,
                         fontSize: 17,
-                        color: Colors.black87,
-                        letterSpacing: 0.5),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -243,7 +262,7 @@ class _AddFromState extends State<AddFrom> {
                     iconSize: 20.0,
                     iconEnabledColor: kPrimaryColor,
                     items: <String>[
-                      'vegetables',
+                      'vegetable',
                       'meat',
                       'fruit',
                       'skincare',
@@ -258,7 +277,7 @@ class _AddFromState extends State<AddFrom> {
                       );
                     }).toList(),
                     hint: Text(
-                      "หมวดหมู่",
+                      "Category",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -267,7 +286,7 @@ class _AddFromState extends State<AddFrom> {
                     onChanged: (String value) {
                       setState(() {
                         _categoryValue = value;
-                        _ingredientsValue = _ingredientsValue;
+                        // _ingredientsValue = _ingredientsValue;
                       });
                     },
                   ),
@@ -285,7 +304,7 @@ class _AddFromState extends State<AddFrom> {
                           borderRadius: BorderRadius.circular(29),
                           child: FlatButton(
                             child: Text(
-                              "เพิ่มข้อมูล",
+                              "Submit",
                               style: TextStyle(
                                 fontSize: 17,
                               ),
@@ -295,42 +314,76 @@ class _AddFromState extends State<AddFrom> {
                                 vertical: 10, horizontal: 40),
                             textColor: Colors.white,
                             onPressed: () {
-                              if (formKey.currentState.validate()) {
-                                var name = _ingredientsValue;
-                                var category = _categoryValue;
-                                var now = new DateTime.now();
-                                Random rnd1 = new Random(selectedDate.year);
-                                Random rnd2 = new Random(now.millisecondsSinceEpoch);
-                                int rnd3 = rnd2.nextInt(100000000); 
-                                int rnd4 = rnd1.nextInt(100000000); 
-                                int _id = rnd4+rnd3;
+                              if (_ingredientsValue == null ||
+                                  _ingredientsValue.isEmpty) {
+                                return showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('แจ้งเตือน'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'โปรดกรอกข้อมูลให้ครบถ้วน'),
+                                            // Text(
+                                            //     'Would you like to approve of this message?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('รับทราบ'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                if (formKey.currentState.validate()) {
+                                  var name = _ingredientsValue;
+                                  var category = _categoryValue;
+                                  var now = new DateTime.now();
+                                  Random rnd1 = new Random(selectedDate.year);
+                                  Random rnd2 =
+                                      new Random(now.millisecondsSinceEpoch);
+                                  int rnd3 = rnd2.nextInt(100000000);
+                                  int rnd4 = rnd1.nextInt(100000000);
+                                  int _id = rnd4 + rnd3;
 
-                                //เตรียมข้อมูล
-                                Tooyen tooyenList = Tooyen(
-                                    id: _id,
-                                    name: name,
-                                    category: category,
-                                    date: selectedDate,
-                                    imgPath:
-                                        "assets/images/" + category + ".png"
-                                    // date: DateTime.now()
-                                    ); //object
+                                  //เตรียมข้อมูล
+                                  Tooyen tooyenList = Tooyen(
+                                      id: _id,
+                                      name: name,
+                                      category: category,
+                                      date: selectedDate,
+                                      imgPath:
+                                          "assets/images/" + category + ".png"
+                                      // date: DateTime.now()
+                                      ); //object
 
-                                //เรียก Provider
-                                var provider = Provider.of<TooyenProvider>(
-                                    context,
-                                    listen: false);
-                                provider.addTooyen(tooyenList);
-                                noti.showNotificationDaily(_id,name, selectedDate);
-                                //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
-                                // provider.delTooyen();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        builder: (context) {
-                                          return RouteHome();
-                                        }));
+                                  //เรียก Provider
+                                  var provider = Provider.of<TooyenProvider>(
+                                      context,
+                                      listen: false);
+                                  provider.addTooyen(tooyenList);
+                                  noti.showNotificationDaily(
+                                      _id, name, selectedDate);
+                                  //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
+                                  // provider.delTooyen();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          fullscreenDialog: true,
+                                          builder: (context) {
+                                            return RouteHome();
+                                          }));
+                                }
                               }
                             },
                           )),
@@ -343,8 +396,8 @@ class _AddFromState extends State<AddFrom> {
             )
           ],
         ),
-              ),
-        
+      ),
+
       // ),
     );
   }
@@ -375,64 +428,6 @@ class RoundedInputField extends StatelessWidget {
           hintText: hintText,
           border: InputBorder.none,
         ),
-      ),
-    );
-  }
-}
-
-class NewPadding extends StatelessWidget {
-  final String image1;
-  final String text1;
-
-  const NewPadding({
-    Key key,
-    this.image1,
-    this.text1,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 35),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  //blurRadius: 5,
-                  offset: Offset(0, 0),
-                ),
-              ],
-            ),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Image(
-                    height: 100,
-                    width: 100,
-                    image: AssetImage(image1),
-                  ),
-                ),
-                Text(
-                  text1,
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 15,
-                      decoration: TextDecoration.none),
-                )
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application/Screens/Home/drawer_screen.dart';
+import 'package:mobile_application/Screens/Page/drawer_screen.dart';
 import 'package:mobile_application/Screens/Page/home_screen.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +26,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     borderRadius: BorderRadius.circular(20),
                     child: Image(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/Group.jpg'),
+                      image: AssetImage('assets/images/logo.png'),
                     ),
                   ),
                 ),
@@ -68,6 +68,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       child: Text("Add",
                           style: TextStyle(color: Colors.black, fontSize: 17)),
                       onPressed: () => navigateToAddPage(context)),
+                ]),
+                Row(children: <Widget>[
+                  Icon(
+                    Icons.list_alt,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                  FlatButton(
+                      //color: Colors.red[300],
+                      child: Text("Buying list",
+                          style: TextStyle(color: Colors.black, fontSize: 17)),
+                      onPressed: () => navigateToBuyPage(context)),
                 ]),
 
                 // Row(children: <Widget>[
@@ -137,6 +149,12 @@ navigateToHomePage(BuildContext context) {
 navigateToAddPage(BuildContext context) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
     return RouteAdd();
+  }));
+}
+
+navigateToBuyPage(BuildContext context) {
+  Navigator.push(context, CupertinoPageRoute(builder: (context) {
+    return RouteBuying();
   }));
 }
 
