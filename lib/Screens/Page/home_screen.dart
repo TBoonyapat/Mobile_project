@@ -259,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             //ทำให้อยู่ในช่องที่สร้างข้างบน
                                             alignment: Alignment(-0.9, 0.70),
                                             child: new LinearPercentIndicator(
-                                              width: 160.0,
+                                              width: 170.0,
                                               lineHeight: 15.0,
                                               percent: 0.6,
                                               center: Text(
