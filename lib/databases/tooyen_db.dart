@@ -46,6 +46,16 @@ class TooyenDB {
     return keyID;
   }
 
+  Future deleteRec(int id) async{
+    var db = await this.openDatabase();
+    
+    final finder = Finder(filter: Filter.equals("id", id));
+    await store.delete(
+      await db,
+      finder: finder,
+    );
+  }
+
   Future DeleteData() async{
     var db = await this.openDatabase();
     // var store = intMapStoreFactory.store("tooyen");
@@ -59,7 +69,7 @@ class TooyenDB {
     var db = await this.openDatabase();
     // var store = intMapStoreFactory.store("tooyen");
     var snapshot = await store.find(db,
-        finder: Finder(sortOrders: [SortOrder(Field.key, false)]));
+        finder: Finder(sortOrders: [SortOrder('date')]));
     List ingredientsList = List<Tooyen>();
     //ดึงมาทีละแถว
     for (var record in snapshot) {

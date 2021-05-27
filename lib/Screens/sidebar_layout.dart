@@ -39,6 +39,20 @@ class RouteAdd extends StatelessWidget {
   }
 }
 
+class RouteBuying extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          DrawerScreen(),
+          AddFrom(),
+        ],
+      ),
+    );
+  }
+}
+
 // body: Center(
 //   child: ElevatedButton(
 //      child: Text('Open route'),

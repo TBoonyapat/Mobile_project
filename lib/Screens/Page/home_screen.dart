@@ -8,6 +8,8 @@ import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_application/noti/notification_service.dart';
+import 'package:mobile_application/Screens/sidebar_layout.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
 
@@ -93,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 40,
               ),
               Container(
-                height: 100,
+                height: 110,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: categories.length,
@@ -115,6 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 55),
                                 onPressed: () => null),
                             //color: Colors.grey[700],
+                          ),
+                          SizedBox(
+                            height: 6,
                           ),
                           Text(
                             categories[index]['name'],
@@ -143,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         textStyle: TextStyle(
                           color: Colors.black,
                           fontSize: 35,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -152,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Container(
                       height: 500,
                       child: ListView.builder(
+                        physics: ClampingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: count,
@@ -252,15 +259,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             //ทำให้อยู่ในช่องที่สร้างข้างบน
                                             alignment: Alignment(-0.9, 0.70),
                                             child: new LinearPercentIndicator(
-                                              width: 150.0,
+                                              width: 160.0,
                                               lineHeight: 15.0,
-                                              percent: 0.5,
+                                              percent: 0.6,
                                               center: Text(
                                                 "50.0%",
                                                 style: GoogleFonts.raleway(
                                                   textStyle: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 15,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.w300,
                                                   ),
                                                 ),
@@ -270,14 +277,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Align(
                                             //ทำให้อยู่ในช่องที่สร้างข้างบน
-                                            alignment: Alignment(1.5, 0.80),
+                                            alignment: Alignment(1.5, -0.40),
                                             child: FlatButton(
                                                 child: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red[900],
-                                                  size: 30,
+                                                  Icons.close,
+                                                  color: Colors.black45,
+                                                  size: 20,
                                                 ),
-                                                onPressed: () => null),
+                                                onPressed: () {
+                                                  provider.delIng(data.id);
+                                                  noti.removeReminder(data.id);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          fullscreenDialog:
+                                                              true,
+                                                          builder: (context) {
+                                                            return RouteHome();
+                                                          }));
+                                                }),
                                           ),
                                         ],
                                       ),

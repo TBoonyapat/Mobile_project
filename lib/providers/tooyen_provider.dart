@@ -37,4 +37,16 @@ class TooyenProvider with ChangeNotifier{
           // //แจ้งเตือน Consumer
           // notifyListeners();
       }
+
+      void delIng(int id) async{
+          var db=TooyenDB(dbName: "tooyen.db");
+          
+          //บันทึกข้อมูล
+          await db.deleteRec(id);
+          //ดึงข้อมูลมาแสดงผล
+          // tooyenList=await db.loadAllData();
+          // //แจ้งเตือน Consumer
+          // notifyListeners();
+      }
+      
 }

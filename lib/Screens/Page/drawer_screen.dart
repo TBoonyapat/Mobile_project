@@ -79,7 +79,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       //color: Colors.red[300],
                       child: Text("Buying list",
                           style: TextStyle(color: Colors.black, fontSize: 17)),
-                      onPressed: () => navigateToAddPage(context)),
+                      onPressed: () => navigateToBuyPage(context)),
                 ]),
 
                 // Row(children: <Widget>[
@@ -149,6 +149,12 @@ navigateToHomePage(BuildContext context) {
 navigateToAddPage(BuildContext context) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
     return RouteAdd();
+  }));
+}
+
+navigateToBuyPage(BuildContext context) {
+  Navigator.push(context, CupertinoPageRoute(builder: (context) {
+    return RouteBuying();
   }));
 }
 

@@ -77,31 +77,49 @@ class NotificationManager {
       NotificationDetails(android: _androidNotificationDetails);
 
   
-  Future<void> showNotificationDaily(String name, DateTime expired) async {
+  Future<void> showNotificationDaily(int id,String name, DateTime expired) async {
     // print(expired);
-
     String timeZoneName = await timeZone.getTimeZoneName();
     final location = await timeZone.getLocation(timeZoneName);
     final scheduledDate = tz.TZDateTime.from(expired, location);
-    print(scheduledDate);
-   
-    await flutterLocalNotificationsPlugin.zonedSchedule(
+    var scheduledNotificationDateTime =new DateTime.now();
+    var androidPlatformChannelSpecifics =
+    new AndroidNotificationDetails('your other channel id',
+        'your other channel name', 'your other channel description');
+    var iOSPlatformChannelSpecifics =
+    new IOSNotificationDetails();
+
+    // await flutterLocalNotificationsPlugin.show(
+    //     0, 'Too Yen', 'มีสิ่งของในตู้เย็นหมดอายุ', _notificationDetails,
+    //     payload: 'New Patload');
+    // NotificationDetails platformChannelSpecifics = new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(
+    id,
+    'Too Yen',
+    name+'มีสิ่งของในตู้เย็นหมดอายุ',
+    scheduledNotificationDateTime,
+    _notificationDetails);
+
+    
+    // print(scheduledDate);
+    // print(id);
+    // await flutterLocalNotificationsPlugin.zonedSchedule(
       
-        12345,
-        name,
-        "Your ingredient is expired!",
-        scheduledDate,
-        _notificationDetails,
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+    //     id,
+    //     name,
+    //     "Your ingredient is expired!",
+    //     scheduledDate,
+    //     _notificationDetails,
+    //     androidAllowWhileIdle: true,
+    //     uiLocalNotificationDateInterpretation:
+    //         UILocalNotificationDateInterpretation.absoluteTime);
   }
     
 
   
 
   getPlatformChannelSpecfics() {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         importance: Importance.max,
         priority: Priority.high,
