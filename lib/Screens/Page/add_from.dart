@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:mobile_application/components/rounded_input_field.dart';
 import 'package:mobile_application/components/text_field_container.dart';
 import 'package:mobile_application/constants.dart';
-import 'package:mobile_application/components/rounded_button.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -124,7 +122,7 @@ class _AddFromState extends State<AddFrom> {
                           },
                         ),
                   Text(
-                    'เพิ่มข้อมูล',
+                    'Add Ingredients',
                     style: GoogleFonts.raleway(
                       textStyle: TextStyle(
                         color: Colors.black,
@@ -152,7 +150,7 @@ class _AddFromState extends State<AddFrom> {
                 Container(
                   alignment: Alignment(-0.52, 0.75),
                   child: Text(
-                    'ชื่อวัตถุดิบ',
+                    "Name's Ingredients",
                     style: GoogleFonts.raleway(
                       textStyle: TextStyle(
                         color: Colors.black,
@@ -170,7 +168,7 @@ class _AddFromState extends State<AddFrom> {
                 Column(
                   children: <Widget>[
                     RoundedInputField(
-                      hintText: "เนื้อหมู/นมวัว...",
+                      hintText: "example: egg/milk...",
                       icon: Icons.add,
                       onChanged: (value) {
                         setState(() {
@@ -188,7 +186,7 @@ class _AddFromState extends State<AddFrom> {
                     Container(
                       alignment: Alignment(-0.25, 0.75),
                       child: Text(
-                        'วันที่หมดอายุ : เดือน-วัน-ปี',
+                        'Expiration Date : mm-dd-yyyy',
                         style: GoogleFonts.raleway(
                           textStyle: TextStyle(
                             color: Colors.black,
@@ -237,9 +235,9 @@ class _AddFromState extends State<AddFrom> {
                   height: 20,
                 ),
                 Container(
-                  alignment: Alignment(-0.44, 0.75),
+                  alignment: Alignment(-0.64, 0.75),
                   child: Text(
-                    'หมวดหมู่วัตถุดิบ',
+                    'Category',
                     style: GoogleFonts.raleway(
                       textStyle: TextStyle(
                         color: Colors.black,
@@ -279,7 +277,7 @@ class _AddFromState extends State<AddFrom> {
                       );
                     }).toList(),
                     hint: Text(
-                      "หมวดหมู่",
+                      "Category",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -306,7 +304,7 @@ class _AddFromState extends State<AddFrom> {
                           borderRadius: BorderRadius.circular(29),
                           child: FlatButton(
                             child: Text(
-                              "เพิ่มข้อมูล",
+                              "Submit",
                               style: TextStyle(
                                 fontSize: 17,
                               ),
@@ -321,10 +319,11 @@ class _AddFromState extends State<AddFrom> {
                                 var category = _categoryValue;
                                 var now = new DateTime.now();
                                 Random rnd1 = new Random(selectedDate.year);
-                                Random rnd2 = new Random(now.millisecondsSinceEpoch);
-                                int rnd3 = rnd2.nextInt(100000000); 
-                                int rnd4 = rnd1.nextInt(100000000); 
-                                int _id = rnd4+rnd3;
+                                Random rnd2 =
+                                    new Random(now.millisecondsSinceEpoch);
+                                int rnd3 = rnd2.nextInt(100000000);
+                                int rnd4 = rnd1.nextInt(100000000);
+                                int _id = rnd4 + rnd3;
 
                                 //เตรียมข้อมูล
                                 Tooyen tooyenList = Tooyen(
@@ -342,7 +341,8 @@ class _AddFromState extends State<AddFrom> {
                                     context,
                                     listen: false);
                                 provider.addTooyen(tooyenList);
-                                noti.showNotificationDaily(_id,name, selectedDate);
+                                noti.showNotificationDaily(
+                                    _id, name, selectedDate);
                                 //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
                                 //provider.delTooyen();
                                 Navigator.push(
@@ -401,60 +401,3 @@ class RoundedInputField extends StatelessWidget {
   }
 }
 
-class NewPadding extends StatelessWidget {
-  final String image1;
-  final String text1;
-
-  const NewPadding({
-    Key key,
-    this.image1,
-    this.text1,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 35),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  //blurRadius: 5,
-                  offset: Offset(0, 0),
-                ),
-              ],
-            ),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Image(
-                    height: 100,
-                    width: 100,
-                    image: AssetImage(image1),
-                  ),
-                ),
-                Text(
-                  text1,
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 15,
-                      decoration: TextDecoration.none),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

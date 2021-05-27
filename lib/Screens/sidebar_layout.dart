@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_application/Screens/Page/add_from.dart';
 import 'Page/drawer_screen.dart';
 import '../Screens/Page/home_screen.dart';
+import 'package:mobile_application/Screens/Page/buying_list.dart';
 import '../Screens/home.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:mobile_application/DateTimePicker.dart';
@@ -46,7 +47,7 @@ class RouteBuying extends StatelessWidget {
       body: Stack(
         children: [
           DrawerScreen(),
-          AddFrom(),
+          BuyingList(),
         ],
       ),
     );

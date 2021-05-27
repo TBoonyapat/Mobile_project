@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_application/Screens/Login/components/background.dart';
-import 'package:mobile_application/Screens/Page/configuration.dart';
+import 'package:mobile_application/components/configuration.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile_application/constants.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_application/Screens/Page/configuration.dart';
+import 'package:mobile_application/components/configuration.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_application/models/tooyen.dart';
