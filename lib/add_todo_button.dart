@@ -45,6 +45,7 @@ class AddTodoButton extends StatelessWidget {
             child: const Icon(
               Icons.add_rounded,
               size: 56,
+              color: Colors.white,
             ),
           ),
         ),
