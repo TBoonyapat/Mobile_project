@@ -96,7 +96,7 @@ class NotificationManager {
     await flutterLocalNotificationsPlugin.schedule(
     id,
     'Too Yen',
-    name+'มีสิ่งของในตู้เย็นหมดอายุ',
+    name+'กำลังจะหมดอายุ!',
     scheduledNotificationDateTime,
     _notificationDetails);
 

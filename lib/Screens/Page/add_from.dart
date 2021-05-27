@@ -262,7 +262,7 @@ class _AddFromState extends State<AddFrom> {
                     iconSize: 20.0,
                     iconEnabledColor: kPrimaryColor,
                     items: <String>[
-                      'vegetables',
+                      'vegetable',
                       'meat',
                       'fruit',
                       'skincare',
@@ -286,7 +286,7 @@ class _AddFromState extends State<AddFrom> {
                     onChanged: (String value) {
                       setState(() {
                         _categoryValue = value;
-                        _ingredientsValue = _ingredientsValue;
+                        // _ingredientsValue = _ingredientsValue;
                       });
                     },
                   ),
@@ -314,44 +314,76 @@ class _AddFromState extends State<AddFrom> {
                                 vertical: 10, horizontal: 40),
                             textColor: Colors.white,
                             onPressed: () {
-                              if (formKey.currentState.validate()) {
-                                var name = _ingredientsValue;
-                                var category = _categoryValue;
-                                var now = new DateTime.now();
-                                Random rnd1 = new Random(selectedDate.year);
-                                Random rnd2 =
-                                    new Random(now.millisecondsSinceEpoch);
-                                int rnd3 = rnd2.nextInt(100000000);
-                                int rnd4 = rnd1.nextInt(100000000);
-                                int _id = rnd4 + rnd3;
+                              if (_ingredientsValue == null ||
+                                  _ingredientsValue.isEmpty) {
+                                return showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('แจ้งเตือน'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'โปรดกรอกข้อมูลให้ครบถ้วน'),
+                                            // Text(
+                                            //     'Would you like to approve of this message?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('รับทราบ'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                if (formKey.currentState.validate()) {
+                                  var name = _ingredientsValue;
+                                  var category = _categoryValue;
+                                  var now = new DateTime.now();
+                                  Random rnd1 = new Random(selectedDate.year);
+                                  Random rnd2 =
+                                      new Random(now.millisecondsSinceEpoch);
+                                  int rnd3 = rnd2.nextInt(100000000);
+                                  int rnd4 = rnd1.nextInt(100000000);
+                                  int _id = rnd4 + rnd3;
 
-                                //เตรียมข้อมูล
-                                Tooyen tooyenList = Tooyen(
-                                    id: _id,
-                                    name: name,
-                                    category: category,
-                                    date: selectedDate,
-                                    imgPath:
-                                        "assets/images/" + category + ".png"
-                                    // date: DateTime.now()
-                                    ); //object
+                                  //เตรียมข้อมูล
+                                  Tooyen tooyenList = Tooyen(
+                                      id: _id,
+                                      name: name,
+                                      category: category,
+                                      date: selectedDate,
+                                      imgPath:
+                                          "assets/images/" + category + ".png"
+                                      // date: DateTime.now()
+                                      ); //object
 
-                                //เรียก Provider
-                                var provider = Provider.of<TooyenProvider>(
-                                    context,
-                                    listen: false);
-                                provider.addTooyen(tooyenList);
-                                noti.showNotificationDaily(
-                                    _id, name, selectedDate);
-                                //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
-                                //provider.delTooyen();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        builder: (context) {
-                                          return RouteHome();
-                                        }));
+                                  //เรียก Provider
+                                  var provider = Provider.of<TooyenProvider>(
+                                      context,
+                                      listen: false);
+                                  provider.addTooyen(tooyenList);
+                                  noti.showNotificationDaily(
+                                      _id, name, selectedDate);
+                                  //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
+                                  // provider.delTooyen();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          fullscreenDialog: true,
+                                          builder: (context) {
+                                            return RouteHome();
+                                          }));
+                                }
                               }
                             },
                           )),
@@ -400,4 +432,3 @@ class RoundedInputField extends StatelessWidget {
     );
   }
 }
-
