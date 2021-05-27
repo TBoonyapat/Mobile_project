@@ -248,14 +248,14 @@ class _AddTodo extends State<AddTodo> {
                                 
 
                                 // provider.delTooyen();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        // builder: (context) {
-                                        //   return RouteHome();
-                                        // }
-                                        ));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         fullscreenDialog: true,
+                                //         builder: (context) {
+                                //           return RouteHome();
+                                //         }
+                                //         ));
                               }
                       },
                       child: const Text('Add'),
