@@ -72,31 +72,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
       });
   }
 
-  // Future<Null> _selectTime(BuildContext context) async {
-  //   final TimeOfDay picked = await showTimePicker(
-  //     context: context,
-  //     initialTime: selectedTime,
-  //   );
-  //   if (picked != null)
-  //     setState(() {
-  //       selectedTime = picked;
-  //       _hour = selectedTime.hour.toString();
-  //       _minute = selectedTime.minute.toString();
-  //       if(_minute.length < 2){
-  //         _time = _hour + ' : 0' + _minute;
-  //         _timeController.text = _time;
-  //       }
-  //       else{
-  //         _time = _hour + ' : ' + _minute;
-  //         _timeController.text = _time;
-  //       }
-        
-        
-  //       // _timeController.text = formatDate(
-  //       //     DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
-  //       //     [hh, ':', nn, " ", am]).toString();
-  //     });
-  // }
+  
 
   @override
   void initState() {
