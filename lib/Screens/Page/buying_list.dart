@@ -1,3 +1,199 @@
+// import 'package:flutter/material.dart';
+// import 'package:mobile_application/components/text_field_container.dart';
+// import 'package:mobile_application/constants.dart';
+// import 'package:provider/provider.dart';
+// import 'package:intl/intl.dart';
+// import 'package:uuid/uuid.dart';
+// import 'package:flutter_svg/svg.dart';
+// import 'package:mobile_application/noti/notification_service.dart';
+// import 'package:mobile_application/providers/tooyen_provider.dart';
+// import 'package:mobile_application/components/styles.dart';
+// import 'package:mobile_application/models/tooyen.dart';
+// import 'package:mobile_application/models/models.dart';
+// import 'package:mobile_application/Screens/sidebar_layout.dart';
+// import 'package:mobile_application/Screens/hero_dialog_route.dart';
+// import 'package:mobile_application/fake_data.dart';
+// import 'package:mobile_application/add_todo_button.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:mobile_application/custom_rect_tween.dart';
+// import 'dart:math';
+
+// class BuyingList extends StatefulWidget {
+//   @override
+//   _BuyingListState createState() => _BuyingListState();
+// }
+
+// class _BuyingListState extends State<BuyingList> {
+//   double xOffset = 0;
+//   double yOffset = 0;
+//   bool isDrawerOpen = false;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: AnimatedContainer(
+//         transform: Matrix4.translationValues(xOffset, yOffset, 0)
+//           ..scale(isDrawerOpen ? 0.85 : 1.00)
+//           ..rotateZ(isDrawerOpen ? 0 : 0),
+//         duration: Duration(milliseconds: 200),
+//         decoration: BoxDecoration(
+//           color: Colors.grey[200],
+//           //color: Color(0xFFA0C2A5),
+//           borderRadius: isDrawerOpen
+//               ? BorderRadius.circular(40)
+//               : BorderRadius.circular(0),
+//         ),
+//         child: ListView(children: [
+//           Column(
+//             children: <Widget>[
+//               SizedBox(
+//                 height: 50,
+//               ),
+//               Container(
+//                 margin: EdgeInsets.symmetric(horizontal: 20),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: <Widget>[
+//                     isDrawerOpen
+//                         ? GestureDetector(
+//                             child:
+//                                 Icon(Icons.arrow_back_ios, color: Colors.black),
+//                             onTap: () {
+//                               setState(() {
+//                                 xOffset = 0;
+//                                 yOffset = 0;
+//                                 isDrawerOpen = false;
+//                               });
+//                             },
+//                           )
+//                         : GestureDetector(
+//                             child: Icon(
+//                               Icons.menu,
+//                               color: Colors.black,
+//                             ),
+//                             onTap: () {
+//                               setState(() {
+//                                 xOffset = 200;
+//                                 yOffset = 80;
+//                                 isDrawerOpen = true;
+//                               });
+//                             },
+//                           ),
+//                     Text(
+//                       'Buying List',
+//                       style: GoogleFonts.raleway(
+//                         textStyle: TextStyle(
+//                             color: Colors.black,
+//                             fontSize: 22,
+//                             fontWeight: FontWeight.w700,
+//                             decoration: TextDecoration.none),
+//                       ),
+//                     ),
+//                     GestureDetector(
+//                       child: Container(
+//                         height: 220,
+//                         margin: EdgeInsets.symmetric(horizontal: 20),
+//                         child: Row(
+//                           children: [
+//                             Expanded(
+//                               //กรอบ1(สีเทา)
+//                               child: Stack(
+//                                 children: [
+//                                   Container(
+//                                     decoration: BoxDecoration(
+//                                       color: Color(0xFFA0C2A5),
+//                                       // color: Colors.blueGrey[300],
+//                                       borderRadius: BorderRadius.circular(20),
+//                                       // boxShadow: shadowList,
+//                                     ),
+//                                     margin: EdgeInsets.only(top: 50),
+//                                   ),
+//                                   Align(
+//                                     child: Hero(
+//                                         tag: 1,
+//                                         child: Image.asset(
+//                                             'assets/images/monkey.png')),
+//                                     //child: Image.asset('assets/images/monkey.png')),
+//                                   )
+//                                 ],
+//                               ),
+//                             ),
+//                             Expanded(
+//                               //กรอบ2(สีขาว)
+//                               child: Stack(
+//                                 children: [
+//                                   Container(
+//                                     margin:
+//                                         EdgeInsets.only(top: 60, bottom: 20),
+//                                     decoration: BoxDecoration(
+//                                         color: Colors.white,
+//                                         // boxShadow: shadowList,
+//                                         borderRadius: BorderRadius.only(
+//                                             topRight: Radius.circular(20),
+//                                             bottomRight: Radius.circular(20))),
+//                                   ),
+//                                   // Align(
+//                                   //   child: Text('ผัก'),
+//                                   // ),
+//                                   Align(
+//                                     //ทำให้อยู่ในช่องที่สร้างข้างบน
+//                                     alignment: Alignment(1.50, 0.75),
+//                                     child: FlatButton(
+//                                         child: Icon(
+//                                           Icons.delete,
+//                                           color: Colors.red[900],
+//                                           size: 30,
+//                                         ),
+//                                         onPressed: () => null),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ),
+//                             // Expanded(
+//                             //     child: Stack(
+//                             //   children: <Widget>[
+//                             //     new LinearPercentIndicator(
+//                             //       width: 100.0,
+//                             //       lineHeight: 8.0,
+//                             //       percent: 0.2,
+//                             //       progressColor: Colors.red,
+//                             //     ),
+//                             //   ],
+//                             // )),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 40,
+//               ),
+//               Container(
+//                 decoration: const BoxDecoration(
+//                   gradient: LinearGradient(
+//                     begin: Alignment.topCenter,
+//                     end: Alignment.bottomCenter,
+//                     colors: [
+//                       AppColors.backgroundFadedColor,
+//                       //
+//                     ],
+//                     stops: [0.0, 1],
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 50,
+//               )
+//             ],
+//           ),
+//         ]),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:mobile_application/components/text_field_container.dart';
 import 'package:mobile_application/constants.dart';
@@ -17,6 +213,7 @@ import 'package:mobile_application/add_todo_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/custom_rect_tween.dart';
 import 'dart:math';
+import 'package:mobile_application/components/configuration.dart';
 
 class BuyingList extends StatefulWidget {
   @override
@@ -30,21 +227,18 @@ class _BuyingListState extends State<BuyingList> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Center(
-      child: AnimatedContainer(
-        transform: Matrix4.translationValues(xOffset, yOffset, 0)
-          ..scale(isDrawerOpen ? 0.85 : 1.00)
-          ..rotateZ(isDrawerOpen ? 0 : 0),
-        duration: Duration(milliseconds: 200),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          //color: Color(0xFFA0C2A5),
-          borderRadius: isDrawerOpen
-              ? BorderRadius.circular(40)
-              : BorderRadius.circular(0),
-        ),
-        child: ListView(children: [
+    return AnimatedContainer(
+      transform: Matrix4.translationValues(xOffset, yOffset, 0)
+        ..scale(isDrawerOpen ? 0.85 : 1.00)
+        ..rotateZ(isDrawerOpen ? 0 : 0),
+      duration: Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius:
+            isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
+      ),
+      child: ListView(
+        children: [
           Column(
             children: <Widget>[
               SizedBox(
@@ -68,10 +262,7 @@ class _BuyingListState extends State<BuyingList> {
                             },
                           )
                         : GestureDetector(
-                            child: Icon(
-                              Icons.menu,
-                              color: Colors.black,
-                            ),
+                            child: Icon(Icons.menu, color: Colors.black),
                             onTap: () {
                               setState(() {
                                 xOffset = 200;
@@ -81,7 +272,7 @@ class _BuyingListState extends State<BuyingList> {
                             },
                           ),
                     Text(
-                      'Too-Yen',
+                      'Buying List',
                       style: GoogleFonts.raleway(
                         textStyle: TextStyle(
                             color: Colors.black,
@@ -91,38 +282,97 @@ class _BuyingListState extends State<BuyingList> {
                       ),
                     ),
                     Container(),
-
                   ],
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 20,
               ),
               Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppColors.backgroundFadedColor,
-                //  
-                      ],
-                      stops: [0.0, 1],
-                       ),
-                    ),
-                ),
-              
-              
-     
-              SizedBox(
-                height: 50,
+                height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
+                //margin: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
+                                  ? BorderRadius.circular(40)
+                                  : BorderRadius.circular(0),
 
-              )
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.backgroundFadedColor,
+                                  AppColors.backgroundColor,
+                                ],
+                                stops: [0.0, 1],
+                              ),
+                            ),
+                          ),
+                          SafeArea(
+                            child: _TodoListContent(
+                              todos: fakeData,
+                            ),
+                          ),
+                          const Align(
+                            alignment: Alignment.bottomRight,
+                            child: AddTodoButton(),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-        ]),
+        ],
       ),
     );
+  }
+}
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Consumer(
+      builder: (context, TooyenProvider provider, Widget child) {
+        var count = provider.tooyenList.length; //นับจำนวนข้อมูล
+        if (count <= 0) {
+          return Center(
+            child: Text(
+              "ไม่พบข้อมูล",
+              style: TextStyle(fontSize: 35),
+            ),
+          );
+        } else {
+          return ListView.builder(
+              itemCount: count,
+              itemBuilder: (context, int index) {
+                Tooyen data = provider.tooyenList[index];
+                return Card(
+                  elevation: 5,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: FittedBox(
+                        child: Text(data.category),
+                      ),
+                    ),
+                    title: Text(data.name),
+                    subtitle: Text(DateFormat("dd/MM/yyyy").format(data.date)),
+                  ),
+                );
+              });
+        }
+      },
+    ));
   }
 }
 
@@ -155,7 +405,6 @@ class RoundedInputField extends StatelessWidget {
     );
   }
 }
-
 
 class _TodoListContent extends StatelessWidget {
   const _TodoListContent({
@@ -263,7 +512,6 @@ class _TodoTitle extends StatelessWidget {
 /// Activated from [_TodoCard].
 /// {@endtemplate}
 ///
-
 
 class _TodoPopupCard extends StatelessWidget {
   const _TodoPopupCard({Key key, this.todo}) : super(key: key);

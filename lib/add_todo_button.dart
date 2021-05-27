@@ -116,157 +116,152 @@ class _AddTodo extends State<AddTodo> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: Form (
-          key: formKey ,
-          child : Hero(
-          tag: _heroAddTodo,
-          createRectTween: (begin, end) {
-            return CustomRectTween(begin: begin, end: end);
-          },
-          child: Material(
-            color: AppColors.accentColor,
-            elevation: 2,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      
-                      decoration: InputDecoration(
-                        hintText: 'New todo',
-                        border: InputBorder.none,
+        child: Form(
+          key: formKey,
+          child: Hero(
+            tag: _heroAddTodo,
+            createRectTween: (begin, end) {
+              return CustomRectTween(begin: begin, end: end);
+            },
+            child: Material(
+              color: AppColors.accentColor,
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32)),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'New todo',
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            _TodoEditingController = value;
+                          });
+                        },
                       ),
-                      cursorColor: Colors.white,
-                      onChanged: (value) {
-                        setState(() {
-                          _TodoEditingController = value;
-                        });
-                      },
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    TagEditor(
-                      length: _values.length,
-                      controller: _textEditingController,
-                      focusNode: _focusNode,
-                      delimiters: [',', ' '],
-                      hasAddButton: true,
-                      resetTextOnSubmitted: true,
-                      textStyle: const TextStyle(color: Colors.white),
-                      onSubmitted: (outstandingValue) {
-                        setState(() {
-                          Item itemMap = Item(
-                            id: uuid.v4(),
-                            description: outstandingValue,
-                            completed: false,
-                          );
-
-                          _values.add(itemMap);
-                          print(_values);
-                        });
-                      },
-                      inputDecoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Add items ..',
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.2,
                       ),
-                      onTagChanged: (newValue) {
-                        setState(() {
-                          Item itemMap = Item(
-                            id: uuid.v4(),
-                            description: newValue,
-                            completed: false,
-                          );
+                      TagEditor(
+                        length: _values.length,
+                        controller: _textEditingController,
+                        focusNode: _focusNode,
+                        delimiters: [',', ' '],
+                        hasAddButton: true,
+                        resetTextOnSubmitted: true,
+                        textStyle: const TextStyle(color: Colors.white),
+                        onSubmitted: (outstandingValue) {
+                          setState(() {
+                            Item itemMap = Item(
+                              id: uuid.v4(),
+                              description: outstandingValue,
+                              completed: false,
+                            );
 
-                          _values.add(itemMap);
-                          print(_values);
-                        });
-                      },
-                      tagBuilder: (context, index) => _Chip(
-                        index: index,
-                        label: _values[index].description,
-                        onDeleted: _onDelete,
+                            _values.add(itemMap);
+                            print(_values);
+                          });
+                        },
+                        inputDecoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Add items ..',
+                        ),
+                        onTagChanged: (newValue) {
+                          setState(() {
+                            Item itemMap = Item(
+                              id: uuid.v4(),
+                              description: newValue,
+                              completed: false,
+                            );
+
+                            _values.add(itemMap);
+                            print(_values);
+                          });
+                        },
+                        tagBuilder: (context, index) => _Chip(
+                          index: index,
+                          label: _values[index].description,
+                          onDeleted: _onDelete,
+                        ),
                       ),
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    // This is just a button to illustrate how to use
-                    // TextEditingController to set the value
-                    // or do whatever you want with it
-                    // ElevatedButton(
-                    //   onPressed: _onPressedModifyTextField,
-                    //   child: const Text('Use Controlelr to Set Value'),
-                    // ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Write a note',
-                        border: InputBorder.none,
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.2,
                       ),
-                      cursorColor: Colors.white,
-                      maxLines: 6,
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        if (formKey.currentState.validate()) {
-                                var id = uuid.v4();
-                                var name = _TodoEditingController;
-                                var note = noteEditingController;
-                                var item = _values;
+                      // This is just a button to illustrate how to use
+                      // TextEditingController to set the value
+                      // or do whatever you want with it
+                      // ElevatedButton(
+                      //   onPressed: _onPressedModifyTextField,
+                      //   child: const Text('Use Controlelr to Set Value'),
+                      // ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Write a note',
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
+                        maxLines: 6,
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.2,
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          if (formKey.currentState.validate()) {
+                            var id = uuid.v4();
+                            var name = _TodoEditingController;
+                            var note = noteEditingController;
+                            var item = _values;
 
-                                Todo todoList = Todo(
-                                    id: id,
-                                    description: name,
-                                    note: note,
-                                    items: _values,
+                            Todo todoList = Todo(
+                              id: id,
+                              description: name,
+                              note: note,
+                              items: _values,
+                            ); //obj
 
-                                    ); //obj
-                                
-                                
+                            //เรียก Provider
+                            // var provider = Provider.of<TooyenProvider>(
+                            //     context,
+                            //     listen: false);
+                            // provider.addTooyen(tooyenList);
 
-                                //เรียก Provider
-                                // var provider = Provider.of<TooyenProvider>(
-                                //     context,
-                                //     listen: false);
-                                // provider.addTooyen(tooyenList);
-                                
-
-                                // provider.delTooyen();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        fullscreenDialog: true,
-                                        // builder: (context) {
-                                        //   return RouteHome();
-                                        // }
-                                        ));
-                              }
-                      },
-                      child: const Text('Add'),
-                    ),
-                  ],
+                            // provider.delTooyen();
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       fullscreenDialog: true,
+                            //       // builder: (context) {
+                            //       //   return RouteHome();
+                            //       // }
+                            //     ));
+                          }
+                        },
+                        child: const Text('Add'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
       ),
     );
   }
