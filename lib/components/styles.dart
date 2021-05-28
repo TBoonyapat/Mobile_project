@@ -9,7 +9,7 @@ abstract class AppColors {
   static const Color backgroundFadedColor = Color(0xFF191B1C);
 
   /// Color used for cards and surfaces.
-  static const Color cardColor = Color(0xFF1F2426);
+  static const Color cardColor = Color(0xFFFFFFFF);
 
   /// Accent color used in the application.
   static const Color accentColor = Color(0xFF5F9D6E);
