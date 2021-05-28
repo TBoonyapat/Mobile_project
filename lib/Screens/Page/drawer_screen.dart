@@ -59,7 +59,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
                 Row(children: <Widget>[
                   Icon(
-                    Icons.add,
+                    Icons.add_rounded,
                     color: Colors.black,
                     size: 25,
                   ),
