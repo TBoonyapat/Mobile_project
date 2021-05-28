@@ -4,6 +4,7 @@ import 'package:mobile_application/Screens/home.dart';
 import 'package:mobile_application/constants.dart';
 // import 'package:mobile_application/DateTimePicker.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
+import 'package:mobile_application/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
@@ -22,9 +23,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) {
-          return TooyenProvider();
-        }),
+
+        ChangeNotifierProvider<TooyenProvider>(
+        create: (_) => TooyenProvider(),
+      ),
+      ChangeNotifierProvider<TodoProvider>(
+        create: (_) => TodoProvider(),
+      ),
+        // ChangeNotifierProvider(create: (context) {
+        //   return TooyenProvider();
+        // }),
+        
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

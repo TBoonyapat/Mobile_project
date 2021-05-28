@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_application/components/styles.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:convert';
 import 'package:material_tag_editor/tag_editor.dart';
 import 'package:material_tag_editor/tag_editor_layout_delegate.dart';
 import 'package:material_tag_editor/tag_layout.dart';
@@ -10,6 +11,10 @@ import 'package:mobile_application/add_todo_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/custom_rect_tween.dart';
 import 'package:mobile_application/Screens/hero_dialog_route.dart';
+import 'package:provider/provider.dart';
+import 'package:mobile_application/providers/todo_provider.dart';
+import 'package:mobile_application/models/models.dart';
+import 'package:mobile_application/Screens/sidebar_layout.dart';
 
 /// {@template add_todo_button}
 /// Button to add a new [Todo].
@@ -72,8 +77,8 @@ class _AddTodo extends State<AddTodo> {
   // final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   // List _items;
   // double _fontSize = 14;
-  List<Item> _values = [];
-  List<Todo> _todo = [];
+  List<Item> _values;
+  List<Todo> _todo ;
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _textEditingController = TextEditingController();
   String _TodoEditingController;
@@ -83,7 +88,9 @@ class _AddTodo extends State<AddTodo> {
   void initState() {
     _TodoEditingController = '';
     noteEditingController = '';
-
+    _values = [];
+    _todo = [];
+    
     super.initState();
   }
 
@@ -148,9 +155,11 @@ class _AddTodo extends State<AddTodo> {
                         ),
                         cursorColor: Colors.white,
                         onChanged: (value) {
-                          setState(() {
-                            _TodoEditingController = value;
-                          });
+                          if (this.mounted) {
+                            setState(() {
+                              _TodoEditingController = value;
+                            });
+                          }
                         },
                       ),
                       const Divider(
@@ -166,7 +175,12 @@ class _AddTodo extends State<AddTodo> {
                         resetTextOnSubmitted: true,
                         textStyle: const TextStyle(color: Colors.white),
                         onSubmitted: (outstandingValue) {
-                          setState(() {
+                          if(outstandingValue == null || outstandingValue.isEmpty){
+                              return ;
+                          }
+                          else{
+                            if (this.mounted) {
+                            setState(() {
                             Item itemMap = Item(
                               id: uuid.v4(),
                               description: outstandingValue,
@@ -176,13 +190,18 @@ class _AddTodo extends State<AddTodo> {
                             _values.add(itemMap);
                             print(_values);
                           });
+                          }
+                          }
+                          
+                          
                         },
                         inputDecoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Add items ..',
                         ),
                         onTagChanged: (newValue) {
-                          setState(() {
+                          if (this.mounted) {
+                            setState(() {
                             Item itemMap = Item(
                               id: uuid.v4(),
                               description: newValue,
@@ -192,6 +211,7 @@ class _AddTodo extends State<AddTodo> {
                             _values.add(itemMap);
                             print(_values);
                           });
+                          }
                         },
                         tagBuilder: (context, index) => _Chip(
                           index: index,
@@ -224,36 +244,74 @@ class _AddTodo extends State<AddTodo> {
                       ),
                       FlatButton(
                         onPressed: () {
+                           if (_TodoEditingController == null ||
+                                  _TodoEditingController.isEmpty) {
+                                return showDialog<void>(
+                                  context: context,
+                                  barrierDismissible:
+                                      false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('แจ้งเตือน'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: const <Widget>[
+                                            Text(
+                                                'โปรดกรอกหัวข้อ'),
+                                            // Text(
+                                            //     'Would you like to approve of this message?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('รับทราบ'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
                           if (formKey.currentState.validate()) {
                             var id = uuid.v4();
-                            var name = _TodoEditingController;
+                            var description = _TodoEditingController;
                             var note = noteEditingController;
-                            var item = _values;
+                            String jsonTags = jsonEncode(_values);
+                            print(jsonTags);
+                            // var item = _values;
 
                             Todo todoList = Todo(
+
                               id: id,
-                              description: name,
+                              date: DateTime.now(),
+                              description: description,
                               note: note,
                               items: _values,
                             ); //obj
 
                             //เรียก Provider
-                            // var provider = Provider.of<TooyenProvider>(
-                            //     context,
-                            //     listen: false);
-                            // provider.addTooyen(tooyenList);
+                            var providerTodo = Provider.of<TodoProvider>(
+                                context,
+                                listen: false);
+                                print(todoList.description);
+                            providerTodo.addTodo(todoList);
 
                             // provider.delTooyen();
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       fullscreenDialog: true,
-                            //       // builder: (context) {
-                            //       //   return RouteHome();
-                            //       // }
-                            //     ));
+                            
+                            Navigator.push(
+                                context,
+                                
+                                MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (context) {
+                                    return RouteBuying();
+                                  }
+                                ));
                           }
-                        },
+                        }},
                         child: const Text('Add'),
                       ),
                     ],

@@ -12,6 +12,10 @@ import 'package:mobile_application/fake_data.dart';
 import 'package:mobile_application/add_todo_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/custom_rect_tween.dart';
+import 'dart:math';
+import 'package:mobile_application/components/configuration.dart';
+// import 'package:provider/provider.dart';
+import 'package:mobile_application/providers/todo_provider.dart';
 
 class BuyingList extends StatefulWidget {
   @override
@@ -22,6 +26,12 @@ class _BuyingListState extends State<BuyingList> {
   double xOffset = 0;
   double yOffset = 0;
   bool isDrawerOpen = false;
+  // List<Todo> fakeData;
+
+  void initState() {
+    super.initState();
+    Provider.of<TodoProvider>(context, listen: false).initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,45 +96,101 @@ class _BuyingListState extends State<BuyingList> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
-                //margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
-                                  ? BorderRadius.circular(40)
-                                  : BorderRadius.circular(0),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  //AppColors.backgroundFadedColor,
-                                  //AppColors.backgroundColor,
-                                ],
-                                stops: [0.0, 1],
+              Consumer(builder: (context, TodoProvider provider, Widget child) {
+                var count = provider.todoList.length;
+                if (count <= 0) {
+                  return Container(
+                    height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
+                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
+                                          ? BorderRadius.circular(40)
+                                          : BorderRadius.circular(0),
+
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topCenter,
+                                  //   end: Alignment.bottomCenter,
+                                  //   // colors: [
+                                  //   //   AppColors.backgroundColor,
+                                  //   //   AppColors.backgroundFadedColor,
+                                  //   // ],
+                                  //   stops: [0.0, 1],
+                                  // ),
+                                ),
                               ),
-                            ),
+                              Center(
+                                child: Text(
+                                  "ไม่มีรายการที่ต้องซื้อ",
+                                  style: GoogleFonts.raleway(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const Align(
+                                alignment: Alignment.bottomRight,
+                                child: AddTodoButton(),
+                              )
+                            ],
                           ),
-                          SafeArea(
-                            child: _TodoListContent(
-                              todos: fakeData,
-                            ),
-                          ),
-                          const Align(
-                            alignment: Alignment.bottomRight,
-                            child: AddTodoButton(),
-                          )
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  );
+                } else {
+                  return Container(
+                    height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
+                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
+                                          ? BorderRadius.circular(40)
+                                          : BorderRadius.circular(0),
+
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topCenter,
+                                  //   end: Alignment.bottomCenter,
+                                  //   // colors: [
+                                  //   //   AppColors.backgroundColor,
+                                  //   //   AppColors.backgroundFadedColor,
+                                  //   // ],
+                                  //   stops: [0.0, 1],
+                                  // ),
+                                ),
+                              ),
+                              SafeArea(
+                                child: _TodoListContent(
+                                  todos: provider.todoList,
+                                ),
+                              ),
+                              const Align(
+                                alignment: Alignment.bottomRight,
+                                child: AddTodoButton(),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              }),
             ],
           ),
         ],
