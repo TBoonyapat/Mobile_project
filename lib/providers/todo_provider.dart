@@ -5,7 +5,7 @@ import 'package:mobile_application/models/models.dart';
 class TodoProvider with ChangeNotifier{
     // ตัวอย่างข้อมูล
       List<Todo> todoList = [];
-
+     
       // ดึงข้อมูล
       List<Todo> getTodo(){
         return todoList;
@@ -16,6 +16,8 @@ class TodoProvider with ChangeNotifier{
           todoList=await db.loadAllData();
           notifyListeners();
       }
+
+      
       
       void addTodo(Todo ingList) async{
           var db=TodoDB(dbName: "todoList.db");
@@ -30,23 +32,20 @@ class TodoProvider with ChangeNotifier{
        void delTodoAll() async{
           var db=TodoDB(dbName: "todoList.db");
           
-          //บันทึกข้อมูล
+      
           await db.deleteAllTodo();
-          //ดึงข้อมูลมาแสดงผล
-          // tooyenList=await db.loadAllData();
-          // //แจ้งเตือน Consumer
-          // notifyListeners();
+         
       }
+
+      
 
       void delTodo(String id) async{
           var db=TodoDB(dbName: "todoList.db");
           
-          //บันทึกข้อมูล
+       
           await db.deleteTodoRec(id);
-          //ดึงข้อมูลมาแสดงผล
-          // tooyenList=await db.loadAllData();
-          // //แจ้งเตือน Consumer
-          // notifyListeners();
+        
+          
       }
       
 }

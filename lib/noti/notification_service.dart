@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -33,7 +33,7 @@ class NotificationManager {
   }
 
   void initNotifications() {
-    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+    
     var initializationSettingsAndroid = new AndroidInitializationSettings('refrigerator');
     var initializationSettingsIOS = IOSInitializationSettings(
         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
@@ -60,7 +60,7 @@ class NotificationManager {
 
    getLocalTimezone() async {
      String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-    // print(currentTimeZone);
+    
     return currentTimeZone;
   }
 
@@ -78,31 +78,21 @@ class NotificationManager {
 
   
   Future<void> showNotificationDaily(int id,String name, DateTime expired) async {
-    // print(expired);
+
     String timeZoneName = await timeZone.getTimeZoneName();
     final location = await timeZone.getLocation(timeZoneName);
     final scheduledDate = tz.TZDateTime.from(expired, location);
     var scheduledNotificationDateTime =new DateTime.now();
-    var androidPlatformChannelSpecifics =
-    new AndroidNotificationDetails('your other channel id',
-        'your other channel name', 'your other channel description');
-    var iOSPlatformChannelSpecifics =
-    new IOSNotificationDetails();
-
-    // await flutterLocalNotificationsPlugin.show(
-    //     0, 'Too Yen', 'มีสิ่งของในตู้เย็นหมดอายุ', _notificationDetails,
-    //     payload: 'New Patload');
-    // NotificationDetails platformChannelSpecifics = new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    
     await flutterLocalNotificationsPlugin.schedule(
     id,
     'Too Yen',
-    name+'กำลังจะหมดอายุ!',
+    name+' กำลังจะหมดอายุ!',
     scheduledNotificationDateTime,
     _notificationDetails);
 
     
-    // print(scheduledDate);
-    // print(id);
+    
     // await flutterLocalNotificationsPlugin.zonedSchedule(
       
     //     id,

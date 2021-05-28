@@ -5,6 +5,7 @@ import 'package:mobile_application/models/tooyen.dart';
 class TooyenProvider with ChangeNotifier{
     // ตัวอย่างข้อมูล
       List<Tooyen> tooyenList = [];
+      List<Tooyen> cateList = [];
 
       // ดึงข้อมูล
       List<Tooyen> getTooyen(){
@@ -17,10 +18,19 @@ class TooyenProvider with ChangeNotifier{
           notifyListeners();
       }
       
+      void initCategory(String cate) async{
+          var db=TooyenDB(dbName: "tooyen.db");
+          //ดึงข้อมูลมาแสดงผล
+          
+          cateList=await db.loadCateData(cate.toLowerCase());
+          print(cateList);
+          notifyListeners();
+      }
+      
       void addTooyen(Tooyen ingList) async{
           var db=TooyenDB(dbName: "tooyen.db");
           //บันทึกข้อมูล
-          await db.InsertData(ingList);
+          await db.insertData(ingList);
           //ดึงข้อมูลมาแสดงผล
           tooyenList=await db.loadAllData();
           //แจ้งเตือน Consumer
@@ -30,23 +40,17 @@ class TooyenProvider with ChangeNotifier{
        void delTooyen() async{
           var db=TooyenDB(dbName: "tooyen.db");
           
-          //บันทึกข้อมูล
-          await db.DeleteData();
-          //ดึงข้อมูลมาแสดงผล
-          // tooyenList=await db.loadAllData();
-          // //แจ้งเตือน Consumer
-          // notifyListeners();
+          
+          await db.deleteData();
+          
       }
 
       void delIng(int id) async{
           var db=TooyenDB(dbName: "tooyen.db");
           
-          //บันทึกข้อมูล
+          
           await db.deleteRec(id);
-          //ดึงข้อมูลมาแสดงผล
-          // tooyenList=await db.loadAllData();
-          // //แจ้งเตือน Consumer
-          // notifyListeners();
+          
       }
       
 }

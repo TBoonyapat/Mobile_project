@@ -3,28 +3,19 @@ import 'package:mobile_application/components/styles.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 import 'package:material_tag_editor/tag_editor.dart';
-import 'package:material_tag_editor/tag_editor_layout_delegate.dart';
-import 'package:material_tag_editor/tag_layout.dart';
-import 'package:material_tag_editor/tag_render_layout_box.dart';
+
 import 'package:mobile_application/models/models.dart';
-import 'package:mobile_application/add_todo_button.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:mobile_application/custom_rect_tween.dart';
 import 'package:mobile_application/Screens/hero_dialog_route.dart';
 import 'package:provider/provider.dart';
 import 'package:mobile_application/providers/todo_provider.dart';
-import 'package:mobile_application/models/models.dart';
+
 import 'package:mobile_application/Screens/sidebar_layout.dart';
 
-/// {@template add_todo_button}
-/// Button to add a new [Todo].
-///
-/// Opens a [HeroDialogRoute] of [_AddTodoPopupCard].
-///
-/// Uses a [Hero] with tag [_heroAddTodo].
-/// {@endtemplate}
+
 class AddTodoButton extends StatelessWidget {
-  /// {@macro add_todo_button}
+  
   const AddTodoButton({Key key}) : super(key: key);
 
   @override
@@ -59,7 +50,7 @@ class AddTodoButton extends StatelessWidget {
   }
 }
 
-/// Tag-value used for the add todo popup button.
+
 const String _heroAddTodo = 'add-todo-hero';
 
 class AddTodo extends StatefulWidget {
@@ -74,22 +65,20 @@ class _AddTodo extends State<AddTodo> {
   final formKey = GlobalKey<FormState>();
 
   var uuid = Uuid();
-  // final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
-  // List _items;
-  // double _fontSize = 14;
+  
   List<Item> _values;
-  List<Todo> _todo ;
+
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _textEditingController = TextEditingController();
-  String _TodoEditingController;
+  String _todoEditingController;
   String noteEditingController;
 
   @override
   void initState() {
-    _TodoEditingController = '';
-    noteEditingController = '';
+    this._todoEditingController = '';
+    this.noteEditingController = '';
     _values = [];
-    _todo = [];
+ 
     
     super.initState();
   }
@@ -98,26 +87,11 @@ class _AddTodo extends State<AddTodo> {
     setState(() {
       _values.removeAt(index);
     });
-    // print(_values.length);
+    
   }
 
-  // _onAdd(id,itemname) {
-  //   // setState(() {
-  //   //   _values.removeAt();
-  //   // });
-  // }
 
-  _onPressedModifyTextField() {
-    final text = 'Test';
-    _textEditingController.text = text;
-    _textEditingController.value = _textEditingController.value.copyWith(
-      text: text,
-      selection: TextSelection(
-        baseOffset: text.length,
-        extentOffset: text.length,
-      ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -150,14 +124,14 @@ class _AddTodo extends State<AddTodo> {
                           return null;
                         },
                         decoration: InputDecoration(
-                          hintText: 'New todo',
+                          hintText: 'Title',
                           border: InputBorder.none,
                         ),
                         cursorColor: Colors.white,
                         onChanged: (value) {
                           if (this.mounted) {
                             setState(() {
-                              _TodoEditingController = value;
+                              _todoEditingController = value;
                             });
                           }
                         },
@@ -173,7 +147,7 @@ class _AddTodo extends State<AddTodo> {
                         delimiters: [',', ' '],
                         hasAddButton: true,
                         resetTextOnSubmitted: true,
-                        textStyle: const TextStyle(color: Colors.white),
+                        textStyle: const TextStyle(color: Colors.black),
                         onSubmitted: (outstandingValue) {
                           if(outstandingValue == null || outstandingValue.isEmpty){
                               return ;
@@ -197,7 +171,7 @@ class _AddTodo extends State<AddTodo> {
                         },
                         inputDecoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Add items ..',
+                          hintText: ' Add items ..',
                         ),
                         onTagChanged: (newValue) {
                           if (this.mounted) {
@@ -223,13 +197,7 @@ class _AddTodo extends State<AddTodo> {
                         color: Colors.white,
                         thickness: 0.2,
                       ),
-                      // This is just a button to illustrate how to use
-                      // TextEditingController to set the value
-                      // or do whatever you want with it
-                      // ElevatedButton(
-                      //   onPressed: _onPressedModifyTextField,
-                      //   child: const Text('Use Controlelr to Set Value'),
-                      // ),
+                      
                       TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Write a note',
@@ -237,6 +205,12 @@ class _AddTodo extends State<AddTodo> {
                         ),
                         cursorColor: Colors.white,
                         maxLines: 6,
+                        onChanged: (value) {
+                          setState(() {
+                              noteEditingController = value;
+                            });
+
+                        },
                       ),
                       const Divider(
                         color: Colors.white,
@@ -244,8 +218,8 @@ class _AddTodo extends State<AddTodo> {
                       ),
                       FlatButton(
                         onPressed: () {
-                           if (_TodoEditingController == null ||
-                                  _TodoEditingController.isEmpty) {
+                           if (_todoEditingController == null ||
+                                  _todoEditingController.isEmpty) {
                                 return showDialog<void>(
                                   context: context,
                                   barrierDismissible:
@@ -277,10 +251,11 @@ class _AddTodo extends State<AddTodo> {
                               } else {
                           if (formKey.currentState.validate()) {
                             var id = uuid.v4();
-                            var description = _TodoEditingController;
+                            var description = _todoEditingController;
                             var note = noteEditingController;
+                            print(note);
                             String jsonTags = jsonEncode(_values);
-                            print(jsonTags);
+                            // print(jsonTags);
                             // var item = _values;
 
                             Todo todoList = Todo(

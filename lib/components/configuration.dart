@@ -6,7 +6,7 @@ List<BoxShadow> shadowList = [
 ];
 
 List<Map> categories = [
-  {'name': 'Vegetables', 'iconPath': 'assets/images/Vegetables.png'},
+  {'name': 'Vegetable', 'iconPath': 'assets/images/Vegetables.png'},
   {'name': 'Skincare', 'iconPath': 'assets/images/skincare.png'},
   {'name': 'Meat', 'iconPath': 'assets/images/meat.png'},
   {'name': 'Seasoning', 'iconPath': 'assets/images/seasoning.png'},
@@ -16,8 +16,4 @@ List<Map> categories = [
   {'name': 'Drink', 'iconPath': 'assets/images/drink.png'}
 ];
 
-// List<Map> drawerItems = [
-//   {'icon': Icons.home, 'title': 'Home'},
-//   {'icon': Icons.add, 'title': 'Add'},
-//   {'icon': Icons.list_alt, 'title': 'Buying list'},
-// ];
+

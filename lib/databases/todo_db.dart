@@ -28,12 +28,10 @@ class TodoDB {
 
   //บันทึกข้อมูล
   Future<int> insertData(Todo todoList) async {
-    //ฐานข้อมูล => Store
-    // transaction.db => expense
+    
     var db = await this.openDatabase();
-    // var store = intMapStoreFactory.store("tooyen");
-    List<Item> todoItem;
-    todoItem = todoList.items;
+
+   
     String jsonTags = jsonEncode(todoList.items);
                             print(jsonTags);
     // json
@@ -43,7 +41,7 @@ class TodoDB {
       "description": todoList.description,
       "note": todoList.note,
       "items" : jsonTags
-      // .toIso8601String()
+     
     });
     db.close();
     return keyID;
@@ -61,7 +59,7 @@ class TodoDB {
 
   Future deleteAllTodo() async{
     var db = await this.openDatabase();
-    // var store = intMapStoreFactory.store("tooyen");
+    
     await store.delete(db);
   }
   //ดึงข้อมูล
@@ -77,12 +75,10 @@ class TodoDB {
     //ดึงมาทีละแถว
     for (var record in snapshot) {
       List<Item> itemList = [];
-      // print(record["items"]);
+
        var decode=jsonDecode(record["items"]);
       itemList = (decode as List).map((data) => new Item.fromJson(data)).toList();
-      // itemList = record["items"].map((data) => new Item.fromJson(data)).toList();
-      // print(itemList);
-      // Item.fromJson(jsonDecode( record["items"]));
+     
       TodosList.add(Todo(
           id:record["id"],
           date : DateTime.parse(record["date"]),

@@ -22,22 +22,22 @@ class _AddFromState extends State<AddFrom> {
   final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
-  String _chosenValue;
+
   String _categoryValue;
   double _height;
   double _width;
   String _ingredientsValue;
-  String _setTime, _setDate;
-  DateTime exp_date;
-  String _hour, _minute, _time;
+  String  _setDate;
+
+
   var uuid = Uuid();
   bool isDrawerOpen = false;
   Random random = new Random();
   DateTime selectedDate = DateTime.now().add(const Duration(days: 1));
-  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
-  TextEditingController _ingredientsController = TextEditingController();
+  
+  
   TextEditingController _dateController = TextEditingController();
-  TextEditingController _timeController = TextEditingController();
+ 
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -45,11 +45,11 @@ class _AddFromState extends State<AddFrom> {
         initialDate: selectedDate,
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime.now().add(const Duration(days: 1)),
-        lastDate: DateTime(2022));
+        lastDate: DateTime(2024));
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        // exp_date = selectedDate;
+    
         _dateController.text = DateFormat.yMd().format(selectedDate);
       });
   }
@@ -60,7 +60,7 @@ class _AddFromState extends State<AddFrom> {
     _dateController.text =
         DateFormat.yMd().format(DateTime.now().add(const Duration(days: 1)));
     _categoryValue = "meat";
-    _timeController.text = "00 : 00";
+   
 
     super.initState();
   }
@@ -81,7 +81,7 @@ class _AddFromState extends State<AddFrom> {
         borderRadius:
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
       ),
-      // child: SingleChildScrollView(
+  
       child: Form(
         key: formKey,
         child: ListView(
@@ -150,7 +150,7 @@ class _AddFromState extends State<AddFrom> {
                 Container(
                   alignment: Alignment(-0.52, 0.75),
                   child: Text(
-                    "Name's Ingredients",
+                    "Ingredient Name",
                     style: GoogleFonts.raleway(
                       textStyle: TextStyle(
                         color: Colors.black,
@@ -254,10 +254,7 @@ class _AddFromState extends State<AddFrom> {
                   alignment: Alignment.center,
                   child: DropdownButton<String>(
                     value: _categoryValue,
-                    // underline: Container(
-                    //   color: Colors.blue,
-                    // ),
-                    //dropdownColor: Colors.white,
+                    
                     icon: Icon(Icons.arrow_downward),
                     iconSize: 20.0,
                     iconEnabledColor: kPrimaryColor,
@@ -291,9 +288,7 @@ class _AddFromState extends State<AddFrom> {
                     },
                   ),
                 ),
-                // SizedBox(
-                //   height: 36,
-                // ),
+               
                 Column(
                   children: <Widget>[
                     Container(
@@ -364,7 +359,7 @@ class _AddFromState extends State<AddFrom> {
                                       date: selectedDate,
                                       imgPath:
                                           "assets/images/" + category + ".png"
-                                      // date: DateTime.now()
+                                     
                                       ); //object
 
                                   //เรียก Provider
@@ -374,7 +369,7 @@ class _AddFromState extends State<AddFrom> {
                                   provider.addTooyen(tooyenList);
                                   noti.showNotificationDaily(
                                       _id, name, selectedDate);
-                                  //  manager.showNotificationDaily(tooyenList.id, name, Datetime.now());
+                                  
                                   // provider.delTooyen();
                                   Navigator.push(
                                       context,
@@ -390,15 +385,14 @@ class _AddFromState extends State<AddFrom> {
                     ),
                   ],
                 ),
-                //   RoundedButton(
-                //       text: "Add", press: () {}, color: Color(0xFF5F9D6E)),
+                
               ],
             )
           ],
         ),
       ),
 
-      // ),
+  
     );
   }
 }

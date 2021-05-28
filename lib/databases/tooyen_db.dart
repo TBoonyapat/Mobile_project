@@ -27,9 +27,9 @@ class TooyenDB {
   }
 
   //บันทึกข้อมูล
-  Future<int> InsertData(Tooyen tooyenList) async {
+  Future<int> insertData(Tooyen tooyenList) async {
     //ฐานข้อมูล => Store
-    // transaction.db => expense
+    
     var db = await this.openDatabase();
     // var store = intMapStoreFactory.store("tooyen");
 
@@ -40,7 +40,7 @@ class TooyenDB {
       "category": tooyenList.category,
       "date": tooyenList.date.toIso8601String(),
       "imgPath" : tooyenList.imgPath
-      // .toIso8601String()
+
     });
     db.close();
     return keyID;
@@ -56,7 +56,7 @@ class TooyenDB {
     );
   }
 
-  Future DeleteData() async{
+  Future deleteData() async{
     var db = await this.openDatabase();
     // var store = intMapStoreFactory.store("tooyen");
     await store.delete(db);
@@ -67,7 +67,7 @@ class TooyenDB {
   // เก่า => ใหม่ true น้อย => มาก
   Future<List<Tooyen>> loadAllData() async {
     var db = await this.openDatabase();
-    // var store = intMapStoreFactory.store("tooyen");
+    
     var snapshot = await store.find(db,
         finder: Finder(sortOrders: [SortOrder('date')]));
     List ingredientsList = List<Tooyen>();
@@ -82,5 +82,29 @@ class TooyenDB {
           ));
     }
     return ingredientsList;
+  }
+
+
+Future<List<Tooyen>> loadCateData(cate) async {
+
+    var db = await this.openDatabase();
+    
+    var snapshot = await store.find(db,
+        finder: Finder(filter: Filter.equals('category', cate ), 
+        sortOrders: [SortOrder('date')]));
+    List categoryList = List<Tooyen>();
+
+    for (var record in snapshot) {
+    
+      categoryList.add(Tooyen(
+          id:record["id"],
+          name: record["name"],
+          category: record["category"],
+          date : DateTime.parse(record["date"]),
+          imgPath: record["imgPath"],
+          ));
+    }
+
+    return categoryList;
   }
 }

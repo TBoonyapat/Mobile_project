@@ -8,13 +8,11 @@ import 'package:mobile_application/components/styles.dart';
 import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/models/models.dart';
 import 'package:mobile_application/Screens/hero_dialog_route.dart';
-import 'package:mobile_application/fake_data.dart';
+
 import 'package:mobile_application/add_todo_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/custom_rect_tween.dart';
-import 'dart:math';
-import 'package:mobile_application/components/configuration.dart';
-// import 'package:provider/provider.dart';
+
 import 'package:mobile_application/providers/todo_provider.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
 
@@ -27,7 +25,7 @@ class _BuyingListState extends State<BuyingList> {
   double xOffset = 0;
   double yOffset = 0;
   bool isDrawerOpen = false;
-  // List<Todo> fakeData;
+
 
   void initState() {
     super.initState();
@@ -102,7 +100,7 @@ class _BuyingListState extends State<BuyingList> {
                 if (count <= 0) {
                   return Container(
                     height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
-                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    
                     child: Column(
                       children: [
                         Expanded(
@@ -115,15 +113,7 @@ class _BuyingListState extends State<BuyingList> {
                                           ? BorderRadius.circular(40)
                                           : BorderRadius.circular(0),
 
-                                  // gradient: LinearGradient(
-                                  //   begin: Alignment.topCenter,
-                                  //   end: Alignment.bottomCenter,
-                                  //   // colors: [
-                                  //   //   AppColors.backgroundColor,
-                                  //   //   AppColors.backgroundFadedColor,
-                                  //   // ],
-                                  //   stops: [0.0, 1],
-                                  // ),
+                                  
                                 ),
                               ),
                               Center(
@@ -151,7 +141,7 @@ class _BuyingListState extends State<BuyingList> {
                 } else {
                   return Container(
                     height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
-                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    
                     child: Column(
                       children: [
                         Expanded(
@@ -164,15 +154,7 @@ class _BuyingListState extends State<BuyingList> {
                                           ? BorderRadius.circular(40)
                                           : BorderRadius.circular(0),
 
-                                  // gradient: LinearGradient(
-                                  //   begin: Alignment.topCenter,
-                                  //   end: Alignment.bottomCenter,
-                                  //   // colors: [
-                                  //   //   AppColors.backgroundColor,
-                                  //   //   AppColors.backgroundFadedColor,
-                                  //   // ],
-                                  //   stops: [0.0, 1],
-                                  // ),
+                                  
                                 ),
                               ),
                               SafeArea(
@@ -200,45 +182,6 @@ class _BuyingListState extends State<BuyingList> {
   }
 }
 
-class Test extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Consumer(
-      builder: (context, TooyenProvider provider, Widget child) {
-        var count = provider.tooyenList.length; //นับจำนวนข้อมูล
-        if (count <= 0) {
-          return Center(
-            child: Text(
-              "ไม่พบข้อมูล",
-              style: TextStyle(fontSize: 35),
-            ),
-          );
-        } else {
-          return ListView.builder(
-              itemCount: count,
-              itemBuilder: (context, int index) {
-                Tooyen data = provider.tooyenList[index];
-                return Card(
-                  elevation: 5,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: FittedBox(
-                        child: Text(data.category),
-                      ),
-                    ),
-                    title: Text(data.name),
-                    subtitle: Text(DateFormat("dd/MM/yyyy").format(data.date)),
-                  ),
-                );
-              });
-        }
-      },
-    ));
-  }
-}
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
@@ -291,11 +234,7 @@ class _TodoListContent extends StatelessWidget {
   }
 }
 
-/// {@template todo_card}
-/// Card that display a [Todo]'s content.
-///
-/// On tap it opens a [HeroDialogRoute] with [_TodoPopupCard] as the content.
-/// {@endtemplate}
+
 class _TodoCard extends StatelessWidget {
   /// {@macro todo_card}
   const _TodoCard({
@@ -349,42 +288,27 @@ class _TodoCard extends StatelessWidget {
                               color: Colors.black45,
                               size: 20,
                             ),
-                            onPressed: () => null,
+                            onPressed: () {
+                              var providerTodo = Provider.of<TodoProvider>(
+                                context,
+                                listen: false);
+                                providerTodo.delTodo(todo.id);
+                                              
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      fullscreenDialog: true,
+                                                      builder: (context) {
+                                                        return RouteBuying();
+                                                      }),);
+                            },
                           ),
                         ),
                       ],
                     ),
                   ),
 
-                  // Container(
-                  //   //margin: EdgeInsets.symmetric(horizontal: 10),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       SizedBox(
-                  //         child: _TodoTitle(
-                  //           title: todo.description,
-                  //         ),
-                  //       ),
-                  //       Container(),
-                  //       Align(
-                  //         alignment: Alignment.centerRight,
-                  //         child: FlatButton(
-                  //           child: Icon(
-                  //             Icons.close,
-                  //             color: Colors.black45,
-                  //             size: 20,
-                  //           ),
-                  //           onPressed: () => null,
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // _TodoTitle(
-                  //   title: todo.description,
-                  // ),
+                
                   if (todo.items != null) ...[
                     const Divider(),
                     Container(
@@ -401,11 +325,9 @@ class _TodoCard extends StatelessWidget {
   }
 }
 
-/// {@template todo_title}
-/// Title of a [Todo].
-/// {@endtemplate}
+
 class _TodoTitle extends StatelessWidget {
-  /// {@macro todo_title}
+  
   const _TodoTitle({
     Key key,
     @required this.title,
@@ -422,12 +344,7 @@ class _TodoTitle extends StatelessWidget {
   }
 }
 
-/// {@template todo_popup_card}
-/// Popup card to expand the content of a [Todo] card.
-///
-/// Activated from [_TodoCard].
-/// {@endtemplate}
-///
+
 
 class _TodoPopupCard extends StatelessWidget {
   const _TodoPopupCard({Key key, this.todo}) : super(key: key);
@@ -460,21 +377,18 @@ class _TodoPopupCard extends StatelessWidget {
                       const Divider(),
                       _TodoItemsBox(items: todo.items),
                     ],
+                    
                     Container(
                       margin: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.black12,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const TextField(
-                        maxLines: 8,
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
-                            hintText: 'Write a note...',
-                            border: InputBorder.none),
-                      ),
+                      
                     ),
+                    Text(
+                      todo.note
+                    )
                   ],
                 ),
               ),
@@ -486,13 +400,9 @@ class _TodoPopupCard extends StatelessWidget {
   }
 }
 
-/// {@template todo_items_box}
-/// Box containing the list of a [Todo]'s items.
-///
-/// These items can be checked.
-/// {@endtemplate}
+
 class _TodoItemsBox extends StatelessWidget {
-  /// {@macro todo_items_box}
+  
   const _TodoItemsBox({
     Key key,
     @required this.items,
@@ -510,11 +420,9 @@ class _TodoItemsBox extends StatelessWidget {
   }
 }
 
-/// {@template todo_item_template}
-/// An individual [Todo] [Item] with its [Checkbox].
-/// {@endtemplate}
+
 class _TodoItemTile extends StatefulWidget {
-  /// {@macro todo_item_template}
+
   const _TodoItemTile({
     Key key,
     @required this.item,
