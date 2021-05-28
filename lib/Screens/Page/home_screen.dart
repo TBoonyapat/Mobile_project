@@ -248,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Align(
                                           alignment: Alignment(-0.7, 0.27),
                                           child: Text(
-                                            'Catrgory : ' + data.category,
+                                            'Category : ' + data.category,
                                             style: GoogleFonts.raleway(
                                               textStyle: TextStyle(
                                                 color: Colors.black,

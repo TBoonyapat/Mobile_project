@@ -6,7 +6,7 @@ class TooyenProvider with ChangeNotifier{
     // ตัวอย่างข้อมูล
       List<Tooyen> tooyenList = [];
       List<Tooyen> cateList = [];
-
+      List<Tooyen> findList = [];
       // ดึงข้อมูล
       List<Tooyen> getTooyen(){
         return tooyenList;
@@ -24,6 +24,15 @@ class TooyenProvider with ChangeNotifier{
           
           cateList=await db.loadCateData(cate.toLowerCase());
           print(cateList);
+          notifyListeners();
+      }
+
+      void findIngredient(String name) async{
+          var db=TooyenDB(dbName: "tooyen.db");
+          //ดึงข้อมูลมาแสดงผล
+          
+          findList=await db.findIng(name.toLowerCase());
+          
           notifyListeners();
       }
       

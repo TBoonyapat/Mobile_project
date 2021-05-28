@@ -82,13 +82,13 @@ class NotificationManager {
     String timeZoneName = await timeZone.getTimeZoneName();
     final location = await timeZone.getLocation(timeZoneName);
     final scheduledDate = tz.TZDateTime.from(expired, location);
-    var scheduledNotificationDateTime =new DateTime.now();
+    var scheduledNotificationDateTime = new DateTime.now();
     
     await flutterLocalNotificationsPlugin.schedule(
     id,
     'Too Yen',
     name+' กำลังจะหมดอายุ!',
-    scheduledNotificationDateTime,
+    scheduledDate,
     _notificationDetails);
 
     

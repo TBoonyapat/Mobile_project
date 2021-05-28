@@ -36,7 +36,7 @@ class TooyenDB {
     // json
     var keyID = store.add(db, {
       "id": tooyenList.id,
-      "name": tooyenList.name,
+      "name": tooyenList.name.toLowerCase(),
       "category": tooyenList.category,
       "date": tooyenList.date.toIso8601String(),
       "imgPath" : tooyenList.imgPath
@@ -106,5 +106,28 @@ Future<List<Tooyen>> loadCateData(cate) async {
     }
 
     return categoryList;
+  }
+
+  Future<List<Tooyen>> findIng(name) async {
+
+    var db = await this.openDatabase();
+    
+    var snapshot = await store.find(db,
+        finder: Finder(filter: Filter.equals('name', name ), 
+        sortOrders: [SortOrder('date')]));
+    List findList = List<Tooyen>();
+
+    for (var record in snapshot) {
+    
+      findList.add(Tooyen(
+          id:record["id"],
+          name: record["name"],
+          category: record["category"],
+          date : DateTime.parse(record["date"]),
+          imgPath: record["imgPath"],
+          ));
+    }
+
+    return findList;
   }
 }
