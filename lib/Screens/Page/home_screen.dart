@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:mobile_application/models/tooyen.dart';
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:intl/intl.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/noti/notification_service.dart';
 import 'package:mobile_application/Screens/sidebar_layout.dart';
+import 'package:mobile_application/Screens/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: <Widget>[
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
@@ -92,8 +92,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 40,
+              // SizedBox(
+              //   height: 40,
+              // ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RoundedInputField(
+                      hintText: "ingredient name...",
+                      onChanged: (value) => null,
+                      //icon: Icons.search,
+                    ),
+                    FlatButton(
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.black45,
+                        size: 20,
+                      ),
+                      onPressed: () => navigateToSearchPage(context, 'name'),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: 110,
@@ -113,12 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: FlatButton(
-                                child: Image.asset(
-                                    categories[index]['iconPath'],
-                                    height: 55,
-                                    width: 55),
-                                onPressed: () => navigateToCategoryPage(
-                                    context, categories[index]['name'])),
+                              child: Image.asset(categories[index]['iconPath'],
+                                  height: 55, width: 55),
+                              onPressed: () => navigateToCategoryPage(
+                                  context, categories[index]['name']),
+                            ),
                           ),
                           SizedBox(
                             height: 6,
@@ -178,7 +201,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Container(
                                           decoration: BoxDecoration(
                                             color: Color(0xFFA0C2A5),
-                                            // color: Colors.blueGrey[300],
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                             boxShadow: shadowList,
@@ -188,13 +210,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Align(
                                           alignment: Alignment(0.0, 0.5),
                                           child: Hero(
-                                              tag: 1,
-                                              child: Image.asset(data.imgPath,
-                                                  height: 130,
-                                                  width: 130,
-                                                  fit: BoxFit
-                                                      .fitWidth)), //ปรับขนาด
-                                        )
+                                            tag: 1,
+                                            child: Image.asset(data.imgPath,
+                                                height: 130,
+                                                width: 130,
+                                                fit: BoxFit.fitWidth),
+                                          ), //ปรับขนาด
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -289,12 +311,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                               provider.delIng(data.id);
                                               noti.removeReminder(data.id);
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      fullscreenDialog: true,
-                                                      builder: (context) {
-                                                        return RouteHome();
-                                                      }));
+                                                context,
+                                                MaterialPageRoute(
+                                                  fullscreenDialog: true,
+                                                  builder: (context) {
+                                                    return RouteHome();
+                                                  },
+                                                ),
+                                              );
                                             },
                                           ),
                                         ),
@@ -323,4 +347,67 @@ navigateToCategoryPage(BuildContext context, String cate) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
     return RouteCategory(cate: cate);
   }));
+}
+
+navigateToSearchPage(BuildContext context, String cate) {
+  Navigator.push(context, CupertinoPageRoute(builder: (context) {
+    return RouteSearch(cate: cate);
+  }));
+}
+
+class RoundedInputField extends StatelessWidget {
+  final String hintText;
+  final IconData icon;
+  final ValueChanged<String> onChanged;
+  const RoundedInputField({
+    Key key,
+    this.hintText,
+    this.icon,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldContainer(
+      child: TextField(
+        onChanged: onChanged,
+        cursorColor: kPrimaryColor,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: InputBorder.none,
+          // icon: Icon(
+          //   icon,
+          //   color: kPrimaryColor,
+          // ),
+        ),
+      ),
+    );
+  }
+}
+
+class TextFieldContainer extends StatelessWidget {
+  final Widget child;
+
+  const TextFieldContainer({
+    Key key,
+    this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+    return Container(
+      //margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: _width / 1.4,
+      height: _height / 15,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: child,
+    );
+  }
 }

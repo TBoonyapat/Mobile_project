@@ -4,6 +4,7 @@ import 'Page/drawer_screen.dart';
 import '../Screens/Page/home_screen.dart';
 import 'package:mobile_application/Screens/Page/buying_list.dart';
 import 'package:mobile_application/Screens/Page/category_screen.dart';
+import 'package:mobile_application/Screens/Page/search_page.dart';
 
 
 class RouteHome extends StatelessWidget {
@@ -62,6 +63,26 @@ class RouteCategory extends StatelessWidget {
         children: [
           DrawerScreen(),
           CategoryScreen(title : cate),
+        ],
+      ),
+    );
+  }
+}
+
+class RouteSearch extends StatelessWidget {
+   const RouteSearch({
+    Key key,
+    @required this.cate,
+  }) : super(key: key);
+  final String cate;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          DrawerScreen(),
+          SearchPage(title : cate),
         ],
       ),
     );

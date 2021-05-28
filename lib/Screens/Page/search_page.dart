@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/components/text_field_container.dart';
+import 'package:mobile_application/Screens/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,14 +12,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_application/components/configuration.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class CategoryScreen extends StatefulWidget {
-  CategoryScreen({Key key, this.title}) : super(key: key);
+class SearchPage extends StatefulWidget {
+  SearchPage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  _SearchPageState createState() => _SearchPageState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _SearchPageState extends State<SearchPage> {
   final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
@@ -83,7 +85,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         },
                       ),
                 Text(
-                  widget.title,
+                  'Search',
                   style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                       color: Colors.black,
@@ -100,48 +102,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
             height: 40,
           ),
           Container(
-            height: 110,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: shadowList,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: FlatButton(
-                            child: Image.asset(categories[index]['iconPath'],
-                                height: 55, width: 55),
-                            onPressed: () => navigateToCategoryPage(
-                                context, categories[index]['name'])),
-                        //color: Colors.grey[700],
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        categories[index]['name'],
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ) //ปรับตำแหน่งตัวอักษรด้วย
-                    ],
+            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RoundedInputField(
+                  hintText: "ingredient name...",
+                  onChanged: (value) => null,
+                  //icon: Icons.search,
+                ),
+                FlatButton(
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.black45,
+                    size: 20,
                   ),
-                );
-              },
+                  onPressed: () => navigateToSearchPage(context, 'name'),
+                ),
+              ],
             ),
           ),
+          //ส่วนแสดง
           Consumer(
             builder: (context, TooyenProvider provider, Widget child) {
               var count = provider.cateList.length; //นับจำนวนข้อมูล
@@ -318,8 +301,65 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 }
 
-navigateToCategoryPage(BuildContext context, String cate) {
+navigateToSearchPage(BuildContext context, String cate) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
-    return RouteCategory(cate: cate);
+    return RouteSearch(cate: cate);
   }));
+}
+
+class RoundedInputField extends StatelessWidget {
+  final String hintText;
+  final IconData icon;
+  final ValueChanged<String> onChanged;
+  const RoundedInputField({
+    Key key,
+    this.hintText,
+    this.icon,
+    this.onChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldContainer(
+      child: TextField(
+        onChanged: onChanged,
+        cursorColor: kPrimaryColor,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: InputBorder.none,
+          // icon: Icon(
+          //   icon,
+          //   color: kPrimaryColor,
+          // ),
+        ),
+      ),
+    );
+  }
+}
+
+class TextFieldContainer extends StatelessWidget {
+  final Widget child;
+
+  const TextFieldContainer({
+    Key key,
+    this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+    return Container(
+      //margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: _width / 1.4,
+      height: _height / 15,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: child,
+    );
+  }
 }
