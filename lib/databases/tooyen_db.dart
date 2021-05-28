@@ -127,7 +127,7 @@ Future<List<Tooyen>> loadCateData(cate) async {
           imgPath: record["imgPath"],
           ));
     }
-
+    
     return findList;
   }
 }

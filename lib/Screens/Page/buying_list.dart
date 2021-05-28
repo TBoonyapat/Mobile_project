@@ -3,7 +3,6 @@ import 'package:mobile_application/components/text_field_container.dart';
 import 'package:mobile_application/Screens/constants.dart';
 import 'package:provider/provider.dart';
 
-
 import 'package:mobile_application/components/styles.dart';
 
 import 'package:mobile_application/models/models.dart';
@@ -25,7 +24,6 @@ class _BuyingListState extends State<BuyingList> {
   double xOffset = 0;
   double yOffset = 0;
   bool isDrawerOpen = false;
-
 
   void initState() {
     super.initState();
@@ -100,7 +98,7 @@ class _BuyingListState extends State<BuyingList> {
                 if (count <= 0) {
                   return Container(
                     height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
-                    
+
                     child: Column(
                       children: [
                         Expanded(
@@ -112,8 +110,6 @@ class _BuyingListState extends State<BuyingList> {
                                       isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
                                           ? BorderRadius.circular(40)
                                           : BorderRadius.circular(0),
-
-                                  
                                 ),
                               ),
                               Center(
@@ -141,7 +137,7 @@ class _BuyingListState extends State<BuyingList> {
                 } else {
                   return Container(
                     height: 640, //ให้กรอบมืดๆมีพื้นที่แสดงเต็มหน้าจอ
-                    
+
                     child: Column(
                       children: [
                         Expanded(
@@ -153,8 +149,6 @@ class _BuyingListState extends State<BuyingList> {
                                       isDrawerOpen //ทำให้กรอบมืดๆมีมุมโค้งๆ
                                           ? BorderRadius.circular(40)
                                           : BorderRadius.circular(0),
-
-                                  
                                 ),
                               ),
                               SafeArea(
@@ -181,7 +175,6 @@ class _BuyingListState extends State<BuyingList> {
     );
   }
 }
-
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
@@ -233,7 +226,6 @@ class _TodoListContent extends StatelessWidget {
     );
   }
 }
-
 
 class _TodoCard extends StatelessWidget {
   /// {@macro todo_card}
@@ -290,25 +282,25 @@ class _TodoCard extends StatelessWidget {
                             ),
                             onPressed: () {
                               var providerTodo = Provider.of<TodoProvider>(
+                                  context,
+                                  listen: false);
+                              providerTodo.delTodo(todo.id);
+
+                              Navigator.push(
                                 context,
-                                listen: false);
-                                providerTodo.delTodo(todo.id);
-                                              
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      fullscreenDialog: true,
-                                                      builder: (context) {
-                                                        return RouteBuying();
-                                                      }),);
+                                MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (context) {
+                                    return RouteBuying();
+                                  },
+                                ),
+                              );
                             },
                           ),
                         ),
                       ],
                     ),
                   ),
-
-                
                   if (todo.items != null) ...[
                     const Divider(),
                     Container(
@@ -325,9 +317,7 @@ class _TodoCard extends StatelessWidget {
   }
 }
 
-
 class _TodoTitle extends StatelessWidget {
-  
   const _TodoTitle({
     Key key,
     @required this.title,
@@ -343,8 +333,6 @@ class _TodoTitle extends StatelessWidget {
     );
   }
 }
-
-
 
 class _TodoPopupCard extends StatelessWidget {
   const _TodoPopupCard({Key key, this.todo}) : super(key: key);
@@ -377,18 +365,28 @@ class _TodoPopupCard extends StatelessWidget {
                       const Divider(),
                       _TodoItemsBox(items: todo.items),
                     ],
-                    
                     Container(
                       margin: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.black12,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      
                     ),
-                    Text(
-                      todo.note
-                    )
+                    Divider(color: Colors.black45),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        todo.note,
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -400,9 +398,7 @@ class _TodoPopupCard extends StatelessWidget {
   }
 }
 
-
 class _TodoItemsBox extends StatelessWidget {
-  
   const _TodoItemsBox({
     Key key,
     @required this.items,
@@ -420,9 +416,7 @@ class _TodoItemsBox extends StatelessWidget {
   }
 }
 
-
 class _TodoItemTile extends StatefulWidget {
-
   const _TodoItemTile({
     Key key,
     @required this.item,

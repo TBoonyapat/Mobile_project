@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:mobile_application/Screens/constants.dart';
-
 import 'package:mobile_application/providers/tooyen_provider.dart';
 import 'package:mobile_application/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'package:mobile_application/Screens/sidebar_layout.dart';
 
-
-
-
-
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-
         ChangeNotifierProvider<TooyenProvider>(
-        create: (_) => TooyenProvider(),
-      ),
-      ChangeNotifierProvider<TodoProvider>(
-        create: (_) => TodoProvider(),
-      ),
-        
-        
+          create: (_) => TooyenProvider(),
+        ),
+        ChangeNotifierProvider<TodoProvider>(
+          create: (_) => TodoProvider(),
+        ),
       ],
       child: MaterialApp(
-        
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.green,
@@ -43,7 +30,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -61,11 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
         backgroundColor: kPrimaryColor,
-        body: 
-        TabBarView(
-          children: [RouteHome(),RouteAdd()],
+        body: TabBarView(
+          children: [RouteHome(), RouteAdd()],
         ),
-        
       ),
     );
   }
