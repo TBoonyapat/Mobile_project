@@ -16,6 +16,7 @@ import 'dart:math';
 import 'package:mobile_application/components/configuration.dart';
 // import 'package:provider/provider.dart';
 import 'package:mobile_application/providers/todo_provider.dart';
+import 'package:mobile_application/Screens/sidebar_layout.dart';
 
 class BuyingList extends StatefulWidget {
   @override
@@ -327,16 +328,68 @@ class _TodoCard extends StatelessWidget {
             color: AppColors.cardColor,
             borderRadius: BorderRadius.circular(12),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  _TodoTitle(title: todo.description),
-                  const SizedBox(
-                    height: 8,
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                          child: _TodoTitle(
+                            title: todo.description,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: FlatButton(
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.black45,
+                              size: 20,
+                            ),
+                            onPressed: () => null,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+
+                  // Container(
+                  //   //margin: EdgeInsets.symmetric(horizontal: 10),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       SizedBox(
+                  //         child: _TodoTitle(
+                  //           title: todo.description,
+                  //         ),
+                  //       ),
+                  //       Container(),
+                  //       Align(
+                  //         alignment: Alignment.centerRight,
+                  //         child: FlatButton(
+                  //           child: Icon(
+                  //             Icons.close,
+                  //             color: Colors.black45,
+                  //             size: 20,
+                  //           ),
+                  //           onPressed: () => null,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+
+                  // _TodoTitle(
+                  //   title: todo.description,
+                  // ),
                   if (todo.items != null) ...[
                     const Divider(),
-                    _TodoItemsBox(items: todo.items),
+                    Container(
+                      child: _TodoItemsBox(items: todo.items),
+                    )
                   ]
                 ],
               ),
