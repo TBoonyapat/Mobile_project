@@ -98,9 +98,6 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 40,
-          ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             decoration: BoxDecoration(

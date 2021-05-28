@@ -129,16 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                             margin: EdgeInsets.only(left: 10),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               boxShadow: shadowList,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(50),
                             ),
                             child: FlatButton(
                               child: Image.asset(categories[index]['iconPath'],
-                                  height: 55, width: 55),
+                                  height: 50, width: 50),
                               onPressed: () => navigateToCategoryPage(
                                   context, categories[index]['name']),
                             ),
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   } else {
                     return Container(
-                      height: 500,
+                      height: 457,
                       child: ListView.builder(
                         physics: ClampingScrollPhysics(),
                         scrollDirection: Axis.vertical,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Tooyen data = provider.tooyenList[index];
                           return GestureDetector(
                             child: Container(
-                              height: 220,
+                              height: 210,
                               margin: EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                         Align(
-                                          alignment: Alignment(-0.7, 0.27),
+                                          alignment: Alignment(-0.8, 0.24),
                                           child: Text(
                                             'Category : ' + data.category,
                                             style: GoogleFonts.raleway(
