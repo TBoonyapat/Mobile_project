@@ -20,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
-  
 
   bool isDrawerOpen = false;
   void initState() {
@@ -118,9 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     categories[index]['iconPath'],
                                     height: 55,
                                     width: 55),
-                                onPressed: () =>
-                                    navigateToCategoryPage(context,categories[index]['name'])),
-                            
+                                onPressed: () => navigateToCategoryPage(
+                                    context, categories[index]['name'])),
                           ),
                           SizedBox(
                             height: 6,
@@ -248,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Align(
                                           alignment: Alignment(-0.7, 0.27),
                                           child: Text(
-                                            'Catrgory : ' + data.category,
+                                            'Category : ' + data.category,
                                             style: GoogleFonts.raleway(
                                               textStyle: TextStyle(
                                                 color: Colors.black,
@@ -313,7 +311,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
               ),
- 
             ],
           ),
         ]),
@@ -324,7 +321,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 navigateToCategoryPage(BuildContext context, String cate) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
-    return RouteCategory(cate : cate);
+    return RouteCategory(cate: cate);
   }));
 }
-
