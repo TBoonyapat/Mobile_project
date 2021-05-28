@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final NotificationManager noti = NotificationManager();
   double xOffset = 0;
   double yOffset = 0;
+  final _selectedCategories = List();
 
   bool isDrawerOpen = false;
   void initState() {
@@ -108,15 +109,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.all(10),
                             margin: EdgeInsets.only(left: 10),
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: shadowList,
-                                borderRadius: BorderRadius.circular(20)),
+                              color: Colors.white,
+                              boxShadow: shadowList,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             child: FlatButton(
                                 child: Image.asset(
                                     categories[index]['iconPath'],
                                     height: 55,
                                     width: 55),
-                                onPressed: () => null),
+                                onPressed: () =>
+                                    navigateToCategoryPage(context)),
                             //color: Colors.grey[700],
                           ),
                           SizedBox(
@@ -139,185 +142,192 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Consumer(
-                  builder: (context, TooyenProvider provider, Widget child) {
-                var count = provider.tooyenList.length; //นับจำนวนข้อมูล
-                if (count <= 0) {
-                  return Center(
-                    child: Text(
-                      "Empty",
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 35,
-                          fontWeight: FontWeight.w400,
+                builder: (context, TooyenProvider provider, Widget child) {
+                  var count = provider.tooyenList.length; //นับจำนวนข้อมูล
+                  if (count <= 0) {
+                    return Center(
+                      child: Text(
+                        "Empty",
+                        style: GoogleFonts.raleway(
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 35,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                } else {
-                  return Container(
+                    );
+                  } else {
+                    return Container(
                       height: 500,
                       child: ListView.builder(
                         physics: ClampingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: count,
-                          itemBuilder: (context, int index) {
-                            Tooyen data = provider.tooyenList[index];
-                            return GestureDetector(
-                              child: Container(
-                                height: 220,
-                                margin: EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      //กรอบ1(สีเทา)
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFA0C2A5),
-                                              // color: Colors.blueGrey[300],
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              boxShadow: shadowList,
-                                            ),
-                                            margin: EdgeInsets.only(top: 50),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: count,
+                        itemBuilder: (context, int index) {
+                          Tooyen data = provider.tooyenList[index];
+                          return GestureDetector(
+                            child: Container(
+                              height: 220,
+                              margin: EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    //กรอบ1(สีเทา)
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFA0C2A5),
+                                            // color: Colors.blueGrey[300],
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            boxShadow: shadowList,
                                           ),
-                                          Align(
-                                            alignment: Alignment(0.0, 0.5),
-                                            child: Hero(
-                                                tag: 1,
-                                                child: Image.asset(data.imgPath,
-                                                    height: 130,
-                                                    width: 130,
-                                                    fit: BoxFit
-                                                        .fitWidth)), //ปรับขนาด
-                                          )
-                                        ],
-                                      ),
+                                          margin: EdgeInsets.only(top: 50),
+                                        ),
+                                        Align(
+                                          alignment: Alignment(0.0, 0.5),
+                                          child: Hero(
+                                              tag: 1,
+                                              child: Image.asset(data.imgPath,
+                                                  height: 130,
+                                                  width: 130,
+                                                  fit: BoxFit
+                                                      .fitWidth)), //ปรับขนาด
+                                        )
+                                      ],
                                     ),
-                                    Expanded(
-                                      //กรอบ2(สีขาว)
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 60, bottom: 20),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                boxShadow: shadowList,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(20))),
+                                  ),
+                                  Expanded(
+                                    //กรอบ2(สีขาว)
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 60, bottom: 20),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: shadowList,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              bottomRight: Radius.circular(20),
+                                            ),
                                           ),
-                                          Align(
-                                            alignment: Alignment(-0.8, -0.1),
-                                            child: Text(
-                                              data.name,
-                                              style: GoogleFonts.raleway(
-                                                textStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 28,
-                                                    fontWeight: FontWeight.w500,
-                                                    decoration:
-                                                        TextDecoration.none),
+                                        ),
+                                        Align(
+                                          alignment: Alignment(-0.8, -0.1),
+                                          child: Text(
+                                            data.name,
+                                            style: GoogleFonts.raleway(
+                                              textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 28,
+                                                  fontWeight: FontWeight.w500,
+                                                  decoration:
+                                                      TextDecoration.none),
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment(-0.7, 0.45),
+                                          child: Text(
+                                            'EXP : ' +
+                                                DateFormat("dd/MM/yyyy")
+                                                    .format(data.date),
+                                            style: GoogleFonts.raleway(
+                                              textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300,
                                               ),
                                             ),
                                           ),
-                                          Align(
-                                            alignment: Alignment(-0.7, 0.45),
-                                            child: Text(
-                                              'EXP : ' +
-                                                  DateFormat("dd/MM/yyyy")
-                                                      .format(data.date),
+                                        ),
+                                        Align(
+                                          alignment: Alignment(-0.7, 0.27),
+                                          child: Text(
+                                            'Catrgory : ' + data.category,
+                                            style: GoogleFonts.raleway(
+                                              textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                          alignment: Alignment(-0.9, 0.70),
+                                          child: new LinearPercentIndicator(
+                                            width: 170.0,
+                                            lineHeight: 15.0,
+                                            percent: 0.6,
+                                            center: Text(
+                                              "50.0%",
                                               style: GoogleFonts.raleway(
                                                 textStyle: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 15,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w300,
                                                 ),
                                               ),
                                             ),
+                                            progressColor: Colors.red[300],
                                           ),
-                                          Align(
-                                            alignment: Alignment(-0.7, 0.27),
-                                            child: Text(
-                                              'Catrgory : ' + data.category,
-                                              style: GoogleFonts.raleway(
-                                                textStyle: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                              ),
+                                        ),
+                                        Align(
+                                          //ทำให้อยู่ในช่องที่สร้างข้างบน
+                                          alignment: Alignment(1.5, -0.40),
+                                          child: FlatButton(
+                                            child: Icon(
+                                              Icons.close,
+                                              color: Colors.black45,
+                                              size: 20,
                                             ),
+                                            onPressed: () {
+                                              provider.delIng(data.id);
+                                              noti.removeReminder(data.id);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      fullscreenDialog: true,
+                                                      builder: (context) {
+                                                        return RouteHome();
+                                                      }));
+                                            },
                                           ),
-                                          Align(
-                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
-                                            alignment: Alignment(-0.9, 0.70),
-                                            child: new LinearPercentIndicator(
-                                              width: 170.0,
-                                              lineHeight: 15.0,
-                                              percent: 0.6,
-                                              center: Text(
-                                                "50.0%",
-                                                style: GoogleFonts.raleway(
-                                                  textStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w300,
-                                                  ),
-                                                ),
-                                              ),
-                                              progressColor: Colors.red[300],
-                                            ),
-                                          ),
-                                          Align(
-                                            //ทำให้อยู่ในช่องที่สร้างข้างบน
-                                            alignment: Alignment(1.5, -0.40),
-                                            child: FlatButton(
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.black45,
-                                                  size: 20,
-                                                ),
-                                                onPressed: () {
-                                                  provider.delIng(data.id);
-                                                  noti.removeReminder(data.id);
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          fullscreenDialog:
-                                                              true,
-                                                          builder: (context) {
-                                                            return RouteHome();
-                                                          }));
-                                                }),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            );
-                          }));
-                }
-              }),
-
-     
-              SizedBox(
-                height: 50,
-              )
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
+              // SizedBox(
+              //   height: 50,
+              // )
             ],
           ),
         ]),
       ),
     );
   }
+}
+
+navigateToCategoryPage(BuildContext context) {
+  Navigator.push(context, CupertinoPageRoute(builder: (context) {
+    return RouteCategory();
+  }));
 }
 
 class Test extends StatelessWidget {

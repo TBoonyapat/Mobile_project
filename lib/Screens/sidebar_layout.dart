@@ -6,6 +6,8 @@ import 'package:mobile_application/Screens/Page/buying_list.dart';
 import '../Screens/home.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:mobile_application/DateTimePicker.dart';
+import 'package:mobile_application/Screens/Page/category_screen.dart';
+
 
 class RouteHome extends StatelessWidget {
   @override
@@ -48,6 +50,20 @@ class RouteBuying extends StatelessWidget {
         children: [
           DrawerScreen(),
           BuyingList(),
+        ],
+      ),
+    );
+  }
+}
+
+class RouteCategory extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          DrawerScreen(),
+          CategoryScreen(),
         ],
       ),
     );
